@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DesktopController : MonoBehaviour {
+public class GridItem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
