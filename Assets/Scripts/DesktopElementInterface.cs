@@ -10,11 +10,9 @@ public interface DesktopElementInterface
 	int getElementType();
 	void setElementType(int type);
 
-	double getDesktopPositionX();
-	void setDesktopPositionX(double posX);
+	Vector2 getScreenPosition();
 
-	double getDesktopPositionY();
-	void setDesktopPositionY(double posY);
+	DesktopPosition getDesktopPosition();
 
 	void performOnClickAction();
 
