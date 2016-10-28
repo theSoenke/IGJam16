@@ -4,7 +4,8 @@ using System.Collections;
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
-    
+
+    private DesktopController _desktopController;
 
     public int Lifepoints
     {
@@ -21,9 +22,22 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public DesktopController DesktopController
+    {
+        get
+        {
+            return _desktopController;
+        }
+
+        set
+        {
+            _desktopController = value;
+        }
+    }
+
 
     // only for initial lifepoint input via editor
-    public int initaialLifes = 3;
+    public int initialLifes = 3;
 
     private int _lifepoints;
 
@@ -39,6 +53,7 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        _desktopController = GetComponent<DesktopController>();
     }
 
     private void EndGame()

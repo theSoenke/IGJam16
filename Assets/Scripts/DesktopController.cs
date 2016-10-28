@@ -1,19 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DesktopController : MonoBehaviour {
+public class DesktopController : MonoBehaviour
+{
 
-	private DesktopElementInterface[,] _grid = new DesktopElementInterface[8, 8];
+    private DesktopElementInterface[,] _grid = new DesktopElementInterface[8, 8];
 
-	void Start () {
-			
-	}
+    void Start()
+    {
 
-	void Update () {
-	
-	}
+    }
 
-	DesktopPosition getSnapPosition(Vector2 screenPosition) {
-		return new DesktopPosition (1, 1);	
-	}
+    void Update()
+    {
+
+    }
+
+    DesktopPosition getSnapPosition(Vector2 screenPosition)
+    {
+        return new DesktopPosition(1, 1);
+    }
 }
