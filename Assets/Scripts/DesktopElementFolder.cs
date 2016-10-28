@@ -1,30 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Zuweisung an eine Image-Instanz
 public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 
 
-	string _elementName;
-	int _elementType;
-	double _desktopPositionX;
-	double _desktopPositionY;
+	public string _elementName;
+	public int _elementType;
+
+	public DesktopPosition FolderDesktopPosition { get; set;}
 
 	int _rageStatusColleague;
 
 	enum Smiley { Happy=1, Smiling=2, Neutral=3, Angry=4, Raging=5};
+	enum ElementType { Folder=1, Trash=2, WorkOrder=3 };
 
-	public DesktopElementFolder()
+
+	// Use this for initialization
+	void Start () 
 	{
+		this._rageStatusColleague = (int) Smiley.Happy;	
+		this._elementType = (int) ElementType.Folder;
 	}
 
-	public DesktopElementFolder(string name,int type,double posx, double posy)
+	// Update is called once per frame
+	void Update () 
 	{
-		this._elementName = name;
-		this._elementType = type;
-		this._desktopPositionX = posx;
-		this._desktopPositionY = posy;
-		this._rageStatusColleague = Smiley.Happy;
+
 	}
+
 
 
 	//erhöht den RagingStatus des Kollegen um
@@ -36,7 +40,7 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 		if (_rageStatusColleague > 5) 
 		{
 			//decrease life
-			_rageStatusColleague = Smiley.Happy;
+			_rageStatusColleague = (int) Smiley.Happy;
 			GameController.Instance.Lifepoints--;
 		
 		}
@@ -45,24 +49,13 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 
 	public void decreaseRagingStatus()
 	{
-		if (_rageStatusColleague > Smiley.Happy) 
+		
+		if (_rageStatusColleague > (int) Smiley.Happy) 
 		{
 			_rageStatusColleague = _rageStatusColleague - 1;
 		}
 	}
 
-
-
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 
 	public string getElementName()
@@ -86,26 +79,7 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 		this._elementType = type;
 	}
 
-	public double getDesktopPositionX()
-	{
-		return this._desktopPositionX;
-	}
 
-	public void setDesktopPositionX(double posX)
-	{
-		this._desktopPositionX = posX;
-	}
-
-
-	public double getDesktopPositionY()
-	{
-		return this._desktopPositionY;
-	}
-
-	public void setDesktopPositionY(double posY)
-	{
-		this._desktopPositionY = posY;
-	}
 
 	public void performOnClickAction()
 	{
