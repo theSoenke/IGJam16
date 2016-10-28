@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 // Zuweisung an eine Image-Instanz
 public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 
+
+
+	public Image _assignedImage;
 
 	public string _elementName;
 	public int _elementType;
@@ -28,7 +32,15 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	// Use this for initialization
 	void Start () 
 	{
+		_assignedImage = GetComponent<Image>();
+
+
+
 		this._rageStatusColleague = (int) Smiley.Happy;	
+
+		//Zuweisung des Sprites zum Image
+		SynchronizeSpriteWithRageStatus();
+
 		this._elementType = (int) ElementType.Folder;
 		this._workingStateColleague = false;
 	}
@@ -36,8 +48,39 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	// Update is called once per frame
 	void Update () 
 	{
-
+		SynchronizeSpriteWithRageStatus ();
 	}
+
+
+
+	void SynchronizeSpriteWithRageStatus()
+	{
+		switch (_rageStatusColleague)
+		{
+		case 1:
+			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_happy");
+			break;
+		case 2:
+			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_smiling");
+			break;
+		case 3:
+			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_neutral");
+			break;
+		case 4:
+			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_angry");
+			break;
+		case 5:
+			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_raging");
+			break;
+
+		}
+		
+	}
+
+
+
+
+
 
 	public void ChangeWorkingState()
 	{
