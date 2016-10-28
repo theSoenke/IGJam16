@@ -9,7 +9,7 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	double _desktopPositionX;
 	double _desktopPositionY;
 
-	enum Smilies { Happy, Smiling};
+	enum Smiliy { Happy, Smiling, Neutral, Angry};
 
 	public DesktopElementFolder()
 	{
@@ -34,23 +34,23 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	}
 
 
-	public string getElementName()
+	string getElementName()
 	{
 		return this._elementName;
 	}
-	public void setElementName(string name)
+	void setElementName(string name)
 	{
 		this._elementName = name;
 	}
 
 
-	public int getElementType()
+	int getElementType()
 	{
 		return this._elementType;
 		
 	}
 
-	public void setElementType(int type)
+	void setElementType(int type)
 	{
 		this._elementType = type;
 	}
@@ -59,6 +59,7 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	{
 		return this._desktopPositionX;
 	}
+
 	void setDesktopPositionX(double posX)
 	{
 		this._desktopPositionX = posX;
