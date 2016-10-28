@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Threading;
 using UnityEngine.EventSystems;
 
 // Zuweisung an eine Image-Instanz
@@ -8,6 +9,10 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 
 
 	public Image _assignedImage;
+
+	//Dieser Timer aktualisiert den rageStatus des Kollegen
+	Timer timer;
+
 
 	public string _elementName;
 	public int _elementType;
@@ -35,6 +40,9 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 	{
 		_assignedImage = GetComponent<Image>();
 
+		timer = new Timer ((e) => {
+			decreaseRagingStatus ();
+		}, null,0,(int) System.TimeSpan.FromMinutes (5).TotalMilliseconds);
 
 
 		this._rageStatusColleague = (int) Smiley.Happy;	
@@ -78,16 +86,11 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 		
 	}
 
-<<<<<<< HEAD
 
-
-
-
-=======
 	public Vector2 getScreenPosition() {
 		return DesktopPosition.toScreenPosition ();
 	}
->>>>>>> 5750486fb976d8399c7b107031ec240b9e9d0130
+
 
 	public void ChangeWorkingState()
 	{
