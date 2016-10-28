@@ -34,48 +34,49 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	}
 
 
-	string getElementName()
+	public string getElementName()
 	{
 		return this._elementName;
 	}
-	void setElementName(string name)
+	public void setElementName(string name)
 	{
 		this._elementName = name;
 	}
 
 
-	int getElementType()
+	public int getElementType()
 	{
 		return this._elementType;
 		
 	}
 
-	void setElementType(int type)
+	public void setElementType(int type)
 	{
 		this._elementType = type;
 	}
 
-	double getDesktopPositionX()
+	public double getDesktopPositionX()
 	{
 		return this._desktopPositionX;
 	}
 
-	void setDesktopPositionX(double posX)
+	public void setDesktopPositionX(double posX)
 	{
 		this._desktopPositionX = posX;
 	}
 
-	double getDesktopPositionY()
+
+	public double getDesktopPositionY()
 	{
 		return this._desktopPositionY;
 	}
 
-	void setDesktopPositionY(double posY)
+	public void setDesktopPositionY(double posY)
 	{
 		this._desktopPositionY = posY;
 	}
 
-	void performOnClickAction()
+	public void performOnClickAction()
 	{
 		//do something
 	}
