@@ -9,7 +9,9 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	double _desktopPositionX;
 	double _desktopPositionY;
 
-	enum Smiliy { Happy, Smiling, Neutral, Angry};
+	int _rageStatusColleague;
+
+	enum Smiley { Happy=1, Smiling=2, Neutral=3, Angry=4, Raging=5};
 
 	public DesktopElementFolder()
 	{
@@ -21,7 +23,36 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 		this._elementType = type;
 		this._desktopPositionX = posx;
 		this._desktopPositionY = posy;
+		this._rageStatusColleague = Smiley.Happy;
 	}
+
+
+	//erhöht den RagingStatus des Kollegen um
+	//einen Zeitwert von 1 bis 3
+	public void increaseRagingStatus(int timeValue)
+	{
+		_rageStatusColleague = _rageStatusColleague + timeValue;
+
+		if (_rageStatusColleague > 5) 
+		{
+			//decrease life
+			_rageStatusColleague = Smiley.Happy;
+			GameController.Instance.Lifepoints--;
+		
+		}
+	}
+
+
+	public void decreaseRagingStatus()
+	{
+		if (_rageStatusColleague > Smiley.Happy) 
+		{
+			_rageStatusColleague = _rageStatusColleague - 1;
+		}
+	}
+
+
+
 
 	// Use this for initialization
 	void Start () {
