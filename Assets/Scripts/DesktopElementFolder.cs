@@ -9,6 +9,8 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	double _desktopPositionX;
 	double _desktopPositionY;
 
+	enum Smilies { Happy, Smiling};
+
 	public DesktopElementFolder()
 	{
 	}
