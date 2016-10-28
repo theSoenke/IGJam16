@@ -3,6 +3,7 @@ using System.Collections;
 
 public class DesktopController : MonoBehaviour
 {
+	public GameObject _screen;
 
     private DesktopElementInterface[,] _grid = new DesktopElementInterface[8, 8];
 
@@ -14,7 +15,7 @@ public class DesktopController : MonoBehaviour
 
     void Start()
     {
-
+		
     }
 
     void Update()

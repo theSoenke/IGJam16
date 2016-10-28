@@ -6,9 +6,8 @@ using UnityEngine.EventSystems;
 
 // Zuweisung an eine Image-Instanz
 public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDropHandler {
-
-
-	public Image _assignedImage;
+	private Image _assignedImage;
+	private Image _smileyImage;
 
 	//Dieser Timer aktualisiert den rageStatus des Kollegen
 	Timer timer;
@@ -38,7 +37,8 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 	// Use this for initialization
 	void Start () 
 	{
-		_assignedImage = GetComponent<Image>();
+		_assignedImage = this.GetComponent<Image> ();
+		_smileyImage = this.GetComponentInChildren<Image> ();
 
 		timer = new Timer ((e) => {
 			decreaseRagingStatus ();
@@ -60,26 +60,24 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 		SynchronizeSpriteWithRageStatus ();
 	}
 
-
-
 	void SynchronizeSpriteWithRageStatus()
 	{
 		switch (_rageStatusColleague)
 		{
 		case 1:
-			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_happy");
+			_smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_happy");
 			break;
 		case 2:
-			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_smiling");
+			_smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_smiling");
 			break;
 		case 3:
-			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_neutral");
+			_smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_neutral");
 			break;
 		case 4:
-			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_angry");
+			_smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_angry");
 			break;
 		case 5:
-			_assignedImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_raging");
+			_smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_raging");
 			break;
 
 		}
