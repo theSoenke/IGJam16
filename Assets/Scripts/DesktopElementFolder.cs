@@ -42,7 +42,7 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 
 		timer = new Timer ((e) => {
 			decreaseRagingStatus ();
-		}, null,0,(int) System.TimeSpan.FromMinutes (5).TotalMilliseconds);
+		}, null,0,(int) System.TimeSpan.FromMinutes (1).TotalMilliseconds);
 
 
 		this._rageStatusColleague = (int) Smiley.Happy;	
@@ -116,7 +116,7 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 	public void decreaseRagingStatus()
 	{
 		
-		if (_rageStatusColleague > (int) Smiley.Happy) 
+		if ((_rageStatusColleague > (int) Smiley.Happy) && (_workingStateColleague==false) ) 
 		{
 			_rageStatusColleague = _rageStatusColleague - 1;
 		}
