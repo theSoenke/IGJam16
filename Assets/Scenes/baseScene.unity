@@ -628,6 +628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _screen: {fileID: 2058476169}
+  _folderPrefab: {fileID: 1000011996349726, guid: 81e736a958525458ca05b14bc53407d3,
+    type: 2}
 --- !u!1 &2058476169
 GameObject:
   m_ObjectHideFlags: 0
