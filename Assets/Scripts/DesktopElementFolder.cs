@@ -10,7 +10,16 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 
 	public DesktopPosition FolderDesktopPosition { get; set;}
 
+	public Vector2 FolderScreenPosition { get; set; }
+
+
+	//Gemütszustand des Kollegen, am Anfang noch Happy
+	//je mehr Arbeit er abkriegt, desto wütender wird er
 	int _rageStatusColleague;
+
+	//arbeitet der Kollege gerade an einem Projekt?
+	bool _workingStateColleague;
+
 
 	enum Smiley { Happy=1, Smiling=2, Neutral=3, Angry=4, Raging=5};
 	enum ElementType { Folder=1, Trash=2, WorkOrder=3 };
@@ -21,6 +30,7 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	{
 		this._rageStatusColleague = (int) Smiley.Happy;	
 		this._elementType = (int) ElementType.Folder;
+		this._workingStateColleague = false;
 	}
 
 	// Update is called once per frame
@@ -29,6 +39,10 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 
 	}
 
+	public void ChangeWorkingState()
+	{
+		this._workingStateColleague = !this._workingStateColleague;
+	}
 
 
 	//erhöht den RagingStatus des Kollegen um

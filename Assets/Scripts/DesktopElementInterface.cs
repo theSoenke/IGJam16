@@ -10,7 +10,6 @@ public interface DesktopElementInterface
 	int getElementType();
 	void setElementType(int type);
 
-	Vector2 getScreenPosition();
 
 	void performOnClickAction();
 
