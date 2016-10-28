@@ -12,8 +12,6 @@ public interface DesktopElementInterface
 
 	Vector2 getScreenPosition();
 
-	DesktopPosition getDesktopPosition();
-
 	void performOnClickAction();
 
 }
