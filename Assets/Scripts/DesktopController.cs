@@ -22,10 +22,31 @@ public class DesktopController : MonoBehaviour
 
     }
 
+	public void addDesktopElement(DesktopElementInterface element) {
+		element.DesktopController = this;
+	}
+
     DesktopPosition getSnapPosition(Vector2 screenPosition)
     {
-		float x = screenPosition.x / TileWidth;
-		float y = screenPosition.y / TileHeight;
-		return new DesktopPosition((int)Mathf.Round(x), (int)Mathf.Round(y));
+		int x = (int) Mathf.Round(screenPosition.x / TileWidth);
+		int y = (int) Mathf.Round(screenPosition.y / TileHeight);
+		if (_grid [x, y] != null) {
+			return null;
+		}
+		return new DesktopPosition(x, y);
     }
+
+	DesktopPosition getEmptyPosition() 
+	{
+		for (int y = 0; y < _grid.Length; y++) 
+		{
+			for (int x = 0; x < _grid.Length; x++) 
+			{
+				if (_grid [x, y] == null) {
+					return new DesktopPosition (x, y);
+				}
+			}
+		}
+		return null;
+	}
 }

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 // Zuweisung an eine Image-Instanz
-public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
-
+public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDropHandler {
 
 
 	public Image _assignedImage;
@@ -12,7 +12,8 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	public string _elementName;
 	public int _elementType;
 
-	public DesktopPosition FolderDesktopPosition { get; set;}
+	public DesktopPosition DesktopPosition { get; set; }
+	public DesktopController DesktopController { get; set; }
 
 	public Vector2 FolderScreenPosition { get; set; }
 
@@ -77,16 +78,21 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 		
 	}
 
+<<<<<<< HEAD
 
 
 
 
+=======
+	public Vector2 getScreenPosition() {
+		return DesktopPosition.toScreenPosition ();
+	}
+>>>>>>> 5750486fb976d8399c7b107031ec240b9e9d0130
 
 	public void ChangeWorkingState()
 	{
 		this._workingStateColleague = !this._workingStateColleague;
 	}
-
 
 	//erhöht den RagingStatus des Kollegen um
 	//einen Zeitwert von 1 bis 3
@@ -113,6 +119,9 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 		}
 	}
 
+	public void OnDrop(PointerEventData data) {
+
+	}
 
 
 	public string getElementName()
