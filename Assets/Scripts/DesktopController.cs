@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DesktopController : MonoBehaviour {
 
-	private GridItem[][] _grid = new GridItem[8][8];
+	private DesktopElementInterface[,] _grid = new DesktopElementInterface[8, 8];
 
 	void Start () {
 			
@@ -13,7 +13,7 @@ public class DesktopController : MonoBehaviour {
 	
 	}
 
-	GridPosition getNearestPosition(Vector2 screenPosition) {
-		
+	DesktopPosition getSnapPosition(Vector2 screenPosition) {
+		return new DesktopPosition (1, 1);	
 	}
 }
