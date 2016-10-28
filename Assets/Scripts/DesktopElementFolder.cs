@@ -16,7 +16,17 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 	public string _elementName;
 	public int _elementType;
 
-	public DesktopPosition DesktopPosition { get; set; }
+	private DesktopPosition _desktopPosition;
+
+	public DesktopPosition DesktopPosition { 
+		get {
+			return _desktopPosition;
+		} 
+		set {
+			_desktopPosition = value;
+			UpdateRectTransform ();
+		}
+	}
 	public DesktopController DesktopController { get; set; }
 
 	public Vector2 FolderScreenPosition { get; set; }
@@ -32,7 +42,6 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 
 	enum Smiley { Happy=1, Smiling=2, Neutral=3, Angry=4, Raging=5};
 	enum ElementType { Folder=1, Trash=2, WorkOrder=3 };
-
 
 	// Use this for initialization
 	void Start () 
@@ -58,6 +67,11 @@ public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDro
 	void Update () 
 	{
 		SynchronizeSpriteWithRageStatus ();
+	}
+
+	void UpdateRectTransform() 
+	{
+		GetComponent<RectTransform> ().position = _desktopPosition.toScreenPosition();
 	}
 
 	void SynchronizeSpriteWithRageStatus()

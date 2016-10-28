@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class DesktopElementTrash : MonoBehaviour {
+public class DesktopElementTrash : MonoBehaviour,DesktopElementInterface {
 
 	public Image _assignedImage;
 	public Sprite _assignedSprite;

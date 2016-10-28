@@ -4,6 +4,7 @@ using System.Collections;
 public class DesktopController : MonoBehaviour
 {
 	public GameObject _screen;
+	public GameObject _folderPrefab;
 
     private DesktopElementInterface[,] _grid = new DesktopElementInterface[8, 8];
 
@@ -15,7 +16,10 @@ public class DesktopController : MonoBehaviour
 
     void Start()
     {
-		
+		for (int i = 0; i < 8; i++) 
+		{
+			addDesktopElement (((GameObject)Instantiate(_folderPrefab, _screen.transform)).GetComponent<DesktopElementFolder>());			
+		}
     }
 
     void Update()
@@ -25,6 +29,7 @@ public class DesktopController : MonoBehaviour
 
 	public void addDesktopElement(DesktopElementInterface element) {
 		element.DesktopController = this;
+		element.DesktopPosition = getEmptyPosition ();
 	}
 
     DesktopPosition getSnapPosition(Vector2 screenPosition)
