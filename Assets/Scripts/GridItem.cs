@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GridItem : MonoBehaviour {
+public class GridItem : MonoBehaviour, IDropHandler {
 
-	// Use this for initialization
+	public DesktopController _grid;
+
 	void Start () {
 	
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}
