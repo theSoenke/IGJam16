@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 // Zuweisung an eine Image-Instanz
-public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
-
+public class DesktopElementFolder : MonoBehaviour, DesktopElementInterface, IDropHandler {
 
 	public string _elementName;
 	public int _elementType;
 
-	public DesktopPosition FolderDesktopPosition { get; set;}
+	public DesktopPosition DesktopPosition { get; set; }
+	public DesktopController DesktopController { get; set; }
 
 	int _rageStatusColleague;
 
@@ -29,7 +30,9 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 
 	}
 
-
+	public Vector2 getScreenPosition() {
+		return DesktopPosition.toScreenPosition ();
+	}
 
 	//erhöht den RagingStatus des Kollegen um
 	//einen Zeitwert von 1 bis 3
@@ -56,6 +59,9 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 		}
 	}
 
+	public void OnDrop(PointerEventData data) {
+
+	}
 
 
 	public string getElementName()

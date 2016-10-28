@@ -14,4 +14,7 @@ public interface DesktopElementInterface
 
 	void performOnClickAction();
 
+	DesktopController DesktopController { get; set; }
+	DesktopPosition DesktopPosition { get; set; }
+
 }
