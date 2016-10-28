@@ -9,6 +9,17 @@ public class DesktopElementFolder : MonoBehaviour,DesktopElementInterface {
 	double _desktopPositionX;
 	double _desktopPositionY;
 
+	public DesktopElementFolder()
+	{
+	}
+
+	public DesktopElementFolder(string name,int type,double posx, double posy)
+	{
+		this._elementName = name;
+		this._elementType = type;
+		this._desktopPositionX = posx;
+		this._desktopPositionY = posy;
+	}
 
 	// Use this for initialization
 	void Start () {
