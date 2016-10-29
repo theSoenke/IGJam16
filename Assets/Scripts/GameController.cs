@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(DesktopController), typeof(Scoreboard))]
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
 
     private DesktopController _desktopController;
+    private Scoreboard _scoreboard;
 
     public int Lifepoints
     {
@@ -35,6 +37,18 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public float ScoreMultiplier
+    {
+        get
+        {
+            return _scoreboard.scoreFactor;
+        }
+        set
+        {
+            _scoreboard.scoreFactor = value;
+        }
+    }
+
 
     // only for initial lifepoint input via editor
     public int initialLifes = 3;
@@ -54,7 +68,8 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
         }
         _desktopController = GetComponent<DesktopController>();
-        
+        _scoreboard = GetComponent<Scoreboard>();
+
     }
 
     private void EndGame()
