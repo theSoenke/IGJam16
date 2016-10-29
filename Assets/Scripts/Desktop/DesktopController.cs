@@ -25,9 +25,9 @@ public class DesktopController : MonoBehaviour
 
 	public void Update()
 	{
-		float difficulty = GameController.Instance.Difficulty.Evaluate (Time.time / 180);
+		float difficulty = GameController.Instance.Difficulty.Evaluate (Time.time / 60);
 		spawnTimer += Time.deltaTime;
-		if (spawnTimer > 20) {
+		if (spawnTimer > 10) {
 			spawnTimer = 0f;
 			SpawnItem(difficulty);
 		}
@@ -36,11 +36,13 @@ public class DesktopController : MonoBehaviour
 
 	private void SpawnItem(float difficulty)
     {
-        int randX = Random.Range(0, gridSize - 1);
-        int randY = Random.Range(0, gridSize - 1);
-		int itemsToSpawn = (int) Mathf.Floor(difficulty*5);
+		int itemsToSpawn = (int) Mathf.Ceil(difficulty*10);
+		Debug.Log ("Spawning " + itemsToSpawn + " items");
 
 		for (int i = 0; i < difficulty; i++) {
+			int randX = Random.Range(0, gridSize - 1);
+        	int randY = Random.Range(0, gridSize - 1);
+
 			if (_itemGrid [randX, randY] == null) {
 				var pos = new Vector3 (randX, randY, 0);
 				pos.x *= tileWidth;
