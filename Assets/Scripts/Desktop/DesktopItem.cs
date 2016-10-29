@@ -6,45 +6,43 @@ using UnityEngine.UI;
 
 public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public Image assignedImage;
-    public Sprite assignedSprite;
 
-    public Timer deadLineExpiringTimer;
-    public Timer killTimer;
-    public int deadLineInMinutes;
+    public int lifeTimeSec;
 
     public static GameObject itemDragged;
 
     private Vector3 startPosition;
     private Transform startParent;
-    private int _state;
+    private float _deadLine;
 
-    private enum StateWorkOrder { New = 1, DeadLineExpiring = 2 };
+    private Animator _animator;
+
+    private const string DEATH_ANIM = "";
+
 
 
     void Start()
     {
-        assignedImage = GetComponent<Image>();
-        assignedImage.overrideSprite = assignedSprite;
+        _deadLine = Time.time + lifeTimeSec;
+        _animator = GetComponent<Animator>();
 
-        _state = (int)StateWorkOrder.New;
-
-        deadLineExpiringTimer = new Timer(e =>
-       {
-           ChangeStateToDeadLineExpiring();
-       }, null, 0, (int)System.TimeSpan.FromMinutes(deadLineInMinutes).TotalMilliseconds);
 
     }
 
-    private void ChangeStateToDeadLineExpiring()
+    private void Update()
     {
-        _state = (int)StateWorkOrder.DeadLineExpiring;
-
-        killTimer = new Timer(e =>
+        if (Time.time > _deadLine)
         {
-            //Destroy(gameObject);
-        }, null, 0, (int)System.TimeSpan.FromMinutes(1).TotalMilliseconds);
+            Die();
+        }
     }
+
+    private void Die()
+    {
+        Destroy(gameObject, 0.5f);
+        _animator.Play(DEATH_ANIM);
+    }
+
 
     public void OnDrag(PointerEventData eventData)
     {
