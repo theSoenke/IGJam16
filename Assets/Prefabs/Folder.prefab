@@ -58,7 +58,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67146b500662f754facfd9b57cb34eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 0.553, g: 0, b: 0, a: 1}
+  hoverColor:
+    r: 0.553
+    g: 0
+    b: 0
+    a: 1
+  normalColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  image: {fileID: 0}
 --- !u!114 &114000011147270118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,8 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e990020625b6c5429a8f2f78d6ac2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _elementName: 
-  _elementType: 0
+  elementName: 
+  elementType: 0
+  hoverColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114000013762615462
 MonoBehaviour:
   m_ObjectHideFlags: 1
