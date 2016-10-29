@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(DesktopController), typeof(Scoreboard))]
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
+    public EmailController EmailController { get; private set; }
+
 
     private DesktopController _desktopController;
     private Scoreboard _scoreboard;
@@ -19,7 +20,7 @@ public class GameController : MonoBehaviour
         set
         {
             _lifepoints = value;
-            if(_lifepoints <= 0)
+            if (_lifepoints <= 0)
                 EndGame();
         }
     }
@@ -68,8 +69,8 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
         }
         _desktopController = GetComponent<DesktopController>();
+        EmailController = GetComponent<EmailController>();
         _scoreboard = GetComponent<Scoreboard>();
-
     }
 
     private void EndGame()
