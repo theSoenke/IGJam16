@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dropSound: {fileID: 0}
   lifeTimeSec: 20
+  workTimeSec: 10
   timeFactor: 2
 --- !u!114 &114000013812776480
 MonoBehaviour:
