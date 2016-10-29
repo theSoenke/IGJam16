@@ -551,11 +551,11 @@ RectTransform:
   - {fileID: 787794997}
   m_Father: {fileID: 1059241837}
   m_RootOrder: 0
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 32, y: 0}
-  m_SizeDelta: {x: 30, y: 100}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 20, y: -22}
+  m_SizeDelta: {x: 80, y: 20}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &273880707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,9 +780,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9411765, g: 0.5536332, b: 0.5536332, a: 1}
-    m_HighlightedColor: {r: 0.8014706, g: 0.43609428, b: 0.43609428, a: 1}
-    m_PressedColor: {r: 0.875, g: 0.23161766, b: 0.23161766, a: 1}
+    m_NormalColor: {r: 0.88235295, g: 0.40873706, b: 0.40873706, a: 1}
+    m_HighlightedColor: {r: 0.8897059, g: 0.28784603, b: 0.28784603, a: 1}
+    m_PressedColor: {r: 0.8088235, g: 0.22599483, b: 0.22599483, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -796,11 +796,11 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 328558057}
+  m_TargetGraphic: {fileID: 1210182459}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 78532618}
+      - m_Target: {fileID: 265015401}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -952,11 +952,11 @@ RectTransform:
   - {fileID: 1081975880}
   m_Father: {fileID: 1059241837}
   m_RootOrder: 1
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 26.5, y: 0}
-  m_SizeDelta: {x: 19, y: 18}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -40, y: -22}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &362644948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -992,11 +992,11 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1210182459}
+  m_TargetGraphic: {fileID: 362644949}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 265015401}
+      - m_Target: {fileID: 1059241836}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -1028,7 +1028,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
