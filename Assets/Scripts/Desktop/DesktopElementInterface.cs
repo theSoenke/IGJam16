@@ -1,19 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public interface DesktopElementInterface 
+﻿public interface DesktopElementInterface
 {
+    string getElementName();
+    void setElementName(string name);
 
-	string getElementName();
-	void setElementName(string name);
-
-	int getElementType();
-	void setElementType(int type);
+    int getElementType();
+    void setElementType(int type);
 
 
-	void performOnClickAction();
+    void performOnClickAction();
 
-	DesktopController DesktopController { get; set; }
-	DesktopPosition DesktopPosition { get; set; }
+    DesktopController DesktopController { get; set; }
+    DesktopPosition DesktopPosition { get; set; }
 
 }

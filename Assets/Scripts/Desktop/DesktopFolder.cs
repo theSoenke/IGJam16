@@ -10,8 +10,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     public int elementType;
     public Color hoverColor = Color.white;
 
-    private Color normalColor;
-    private Image image;
+    private Color _normalColor;
+    private Image _image;
 
     //Gemütszustand des Kollegen, am Anfang noch Happy
     //je mehr Arbeit er abkriegt, desto wütender wird er
@@ -23,25 +23,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     private DesktopPosition _desktopPosition;
     private Image _assignedImage;
     private Image _smileyImage;
-
-    //Dieser Timer aktualisiert den rageStatus des Kollegen
     private Timer timer;
-
-    public DesktopPosition DesktopPosition
-    {
-        get
-        {
-            return _desktopPosition;
-        }
-        set
-        {
-            _desktopPosition = value;
-            UpdateRectTransform();
-        }
-    }
-    public DesktopController DesktopController { get; set; }
-
-    public Vector2 FolderScreenPosition { get; set; }
 
     private enum Smiley { Happy = 1, Smiling = 2, Neutral = 3, Angry = 4, Raging = 5 };
     private enum ElementType { Folder = 1, Trash = 2, WorkOrder = 3 };
@@ -52,8 +34,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         _assignedImage = GetComponent<Image>();
         _smileyImage = GetComponentInChildren<Image>();
 
-        image = GetComponent<Image>();
-        normalColor = image.color;
+        _image = GetComponent<Image>();
+        _normalColor = _image.color;
 
         timer = new Timer((e) =>
         {
@@ -140,12 +122,12 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         if (DesktopItem.itemDragged != null)
         {
-            image.color = hoverColor;
+            _image.color = hoverColor;
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        image.color = normalColor;
+        _image.color = _normalColor;
     }
 }
