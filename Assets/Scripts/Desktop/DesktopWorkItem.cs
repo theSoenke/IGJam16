@@ -21,6 +21,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Animator _animator;
 
     private bool _warning = false;
+    private bool _dead = false;
 
     private const string DeathAnim = "DestroyItem";
     private const string WarningAnim = "Flashing";
@@ -35,8 +36,9 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private void Update()
     {
 
-        if (Time.time > _deadLine)
+        if (Time.time > _deadLine && !_dead)
         {
+            _dead = true;
             GameController.Instance.Lifepoints--;
             Die();
         }
