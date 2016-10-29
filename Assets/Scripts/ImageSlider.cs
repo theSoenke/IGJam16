@@ -8,59 +8,54 @@ public class ImageSlider : MonoBehaviour, ImageReceiver
     public Button nextImageButton;
     public int timeout = 5;
 
-    private float timer = 0;
-    private Texture2D texture;
-    private Queue<Texture2D> imageList;
+    private float _timer;
+    private Queue<Sprite> _imageQueue;
 
 
     void Start()
     {
-        imageList = new Queue<Texture2D>();
+        _imageQueue = new Queue<Sprite>();
         nextImageButton.onClick.AddListener(NextImage);
-        //texture = new Texture2D(100, 100);
 
-        ImageFetcher imageFetcher = new ImageFetcher(this);
+        var imageFetcher = new ImageFetcher(this);
         StartCoroutine(imageFetcher.GetGallery());
     }
 
     void Update()
     {
-        if (timer <= 0)
+        if (_timer <= 0)
         {
             nextImageButton.interactable = true;
         }
         else
         {
             nextImageButton.interactable = false;
-            timer -= Time.deltaTime;
+            _timer -= Time.deltaTime;
         }
     }
 
-    public void NextImage()
+    private void NextImage()
     {
-        if (timer <= 0)
+        if (_timer <= 0)
         {
-            if (imageList.Count != 0)
-            {
-                texture = imageList.Dequeue();
-                Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                currentSliderImage.sprite = sprite;
-                timer = timeout;
-            }
+            if (_imageQueue.Count == 0) return;
+            Sprite sprite = _imageQueue.Dequeue();
+            currentSliderImage.sprite = sprite;
+            _timer = timeout;
         }
     }
 
     public void OnNewImage(string title, Texture2D newTexture)
     {
-        if (texture == null)
+        var sprite = Sprite.Create(newTexture, new Rect(0, 0, newTexture.width, newTexture.height), new Vector2(0.5f, 0.5f));
+
+        if (currentSliderImage.sprite == null)
         {
-            texture = newTexture;
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             currentSliderImage.sprite = sprite;
         }
         else
         {
-            imageList.Enqueue(texture);
+            _imageQueue.Enqueue(sprite);
         }
     }
 }
