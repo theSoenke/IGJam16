@@ -1717,6 +1717,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screen: {fileID: 2058476170}
   itemPrefab: {fileID: 1000013751465628, guid: 6f706e7eb95be704ca06225417a1f791, type: 2}
+  trashPrefab: {fileID: 1000012040683722, guid: 55c810c07a6f1f24a9258a439a498d48,
+    type: 2}
   gridSize: 8
   spacing: 25
 --- !u!114 &1670338353

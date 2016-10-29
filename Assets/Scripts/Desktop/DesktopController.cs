@@ -4,16 +4,23 @@ public class DesktopController : MonoBehaviour
 {
     public Transform screen;
     public GameObject itemPrefab;
+    public GameObject trashPrefab;
     public int gridSize = 8;
     public int spacing = 20;
 
     private int _spawnedItems;
-    private DesktopItem[,] _itemGrid;
+    private IDesktopItem[,] _itemGrid;
 
 
     void Start()
     {
-        _itemGrid = new DesktopItem[gridSize, gridSize];
+        _itemGrid = new IDesktopItem[gridSize, gridSize];
+        _itemGrid[0, 0] = new DesktopFolderTrash();
+        var pos = new Vector3(0, 0, 0);
+        pos += screen.position;
+        GameObject trashFolder = (GameObject)Instantiate(trashPrefab, pos, Quaternion.identity);
+        _itemGrid[0, 0] = trashFolder.GetComponent<DesktopWorkItem>();
+        trashFolder.transform.SetParent(screen);
 
         for (int i = 0; i < 8; i++)
         {
@@ -42,7 +49,7 @@ public class DesktopController : MonoBehaviour
                 pos += screen.position;
                 GameObject itemObject = (GameObject)Instantiate(itemPrefab, pos, Quaternion.identity);
                 itemObject.transform.SetParent(screen);
-                _itemGrid[randX, randY] = itemObject.GetComponent<DesktopItem>();
+                _itemGrid[randX, randY] = itemObject.GetComponent<DesktopWorkItem>();
                 _spawnedItems++;
                 break;
             }

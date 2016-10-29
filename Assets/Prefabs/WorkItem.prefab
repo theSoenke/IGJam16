@@ -25,7 +25,7 @@ GameObject:
   - 95: {fileID: 95000012850320828}
   - 225: {fileID: 225000013916034688}
   m_Layer: 8
-  m_Name: Item
+  m_Name: WorkItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f99a4c557877c4682b03151fd66181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dropSound: {fileID: 0}
+  dropSound: {fileID: 0}
   lifeTimeSec: 20
   workTimeSec: 10
   timeFactor: 2

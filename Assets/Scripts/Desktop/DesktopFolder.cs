@@ -4,10 +4,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
-public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public string elementName;
-
     [Tooltip("time to loose one rage point")]
     public float rageCooldown;
 
@@ -178,7 +176,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
             return;
 
 
-        DesktopItem itemDragged = DesktopItem.itemDragged.GetComponent<DesktopItem>();
+        DesktopWorkItem itemDragged = DesktopWorkItem.itemDragged.GetComponent<DesktopWorkItem>();
 
         _workingStateColleague = true;
         _workDoneTimestamp = Time.time + itemDragged.workTimeSec;
@@ -191,7 +189,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (DesktopItem.itemDragged != null)
+        if (DesktopWorkItem.itemDragged != null)
         {
             _image.color = hoverColor;
         }

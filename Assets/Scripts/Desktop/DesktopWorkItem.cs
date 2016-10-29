@@ -1,19 +1,15 @@
-﻿using System.Threading;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 
-public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DesktopWorkItem : MonoBehaviour, IDesktopItem, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-	public AudioSource _dropSound;
-
+    public AudioSource dropSound;
     public float lifeTimeSec;
-
     public float workTimeSec;
 
     //dumb stuff: determinds the rage induced on the coworker dropped on
-    [Range(1,3)]
+    [Range(1, 3)]
     public int timeFactor = 1;
 
     public static GameObject itemDragged;
@@ -26,8 +22,8 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private bool _warning = false;
 
-    private const string DEATH_ANIM = "DestroyItem";
-    private const string WARNING_ANIM = "Flashing";
+    private const string DeathAnim = "DestroyItem";
+    private const string WarningAnim = "Flashing";
 
     void Start()
     {
@@ -45,10 +41,10 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             Die();
         }
 
-        if ((_deadLine - Time.time) < (_deadLine/3) && !_warning)
+        if ((_deadLine - Time.time) < (_deadLine / 3) && !_warning)
         {
             _warning = true;
-            _animator.Play(WARNING_ANIM);
+            _animator.Play(WarningAnim);
         }
 
     }
@@ -57,7 +53,7 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         Destroy(gameObject, 0.5f);
         _startPosition = transform.position;
-        _animator.Play(DEATH_ANIM);   //TODO: fix anim
+        _animator.Play(DeathAnim);   //TODO: fix anim
     }
 
 
@@ -71,12 +67,12 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         itemDragged = gameObject;
         _startPosition = transform.position;
         _startParent = transform.parent;
-		GetComponent<CanvasGroup> ().blocksRaycasts = false;
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-		GetComponent<CanvasGroup> ().blocksRaycasts = true;
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
         itemDragged = null;
         if (transform.parent == _startParent)
         {
