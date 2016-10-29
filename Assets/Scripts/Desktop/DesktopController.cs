@@ -44,13 +44,9 @@ public class DesktopController : MonoBehaviour
             if (_itemGrid[randX, randY] == null)
             {
                 var pos = new Vector3(randX, randY, 0);
-                Debug.Log(pos);
                 pos.x *= tileWidth;
                 pos.y *= tileHeight;
-                Debug.Log(pos);
-                Debug.Log(padding);
                 pos += new Vector3(padding, padding, 0);
-                Debug.Log("after " + pos);
                 GameObject itemObject = (GameObject)Instantiate(itemPrefab);
                 itemObject.transform.SetParent(screen);
                 itemObject.transform.localPosition = pos;
