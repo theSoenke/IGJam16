@@ -31,7 +31,12 @@ public class DesktopController : MonoBehaviour
 			spawnTimer = 0f;
 			SpawnItem(difficulty);
 		}
-			
+	}
+
+	public void RemoveItem(DesktopWorkItem item) 
+	{
+		Vector2 pos = item.GridPosition;
+		_itemGrid [(int)pos.x, (int)pos.y] = null;
 	}
 
 	private void SpawnItem(float difficulty)
@@ -40,10 +45,12 @@ public class DesktopController : MonoBehaviour
 		Debug.Log ("Spawning " + itemsToSpawn + " items");
 
 		for (int i = 0; i < difficulty; i++) {
-			int randX = Random.Range(0, gridSize - 1);
-        	int randY = Random.Range(0, gridSize - 1);
+			int randX;
+			int randY;
+			do {
+				randX = Random.Range (0, gridSize - 1);
+				randY = Random.Range (0, gridSize - 1);
 
-			if (_itemGrid [randX, randY] == null) {
 				var pos = new Vector3 (randX, randY, 0);
 				pos.x *= tileWidth;
 				pos.y *= tileHeight;
@@ -52,9 +59,10 @@ public class DesktopController : MonoBehaviour
 				GameObject itemObject = (GameObject)Instantiate (itemPrefab);
 				itemObject.transform.SetParent (screen);
 				itemObject.transform.localPosition = pos;
+				itemObject.GetComponent<DesktopWorkItem> ().GridPosition = new Vector2 (randX, randY);
 
 				_itemGrid [randX, randY] = itemObject.GetComponent<DesktopWorkItem> ();
-			}
+			} while (_itemGrid [randX, randY] == null);
 		}
     }
 }

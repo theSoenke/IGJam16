@@ -7,6 +7,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public AudioSource dropSound;
     public float lifeTimeSec;
     public float workTimeSec;
+	public Vector2 GridPosition { get; set; }
 
     //dumb stuff: determinds the rage induced on the coworker dropped on
     [Range(1, 3)]
@@ -62,6 +63,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void Die()
     {
+		GameController.Instance.DesktopController.RemoveItem (this);
         Destroy(gameObject, 0.5f);
         _startPosition = transform.position;
         _animator.Play(DeathAnim);   //TODO: fix anim
