@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
         }
         _desktopController = GetComponent<DesktopController>();
+        
     }
 
     private void EndGame()
