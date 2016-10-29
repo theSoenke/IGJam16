@@ -55,9 +55,10 @@ public class GameController : MonoBehaviour
         }
     }
 
-
     // only for initial lifepoint input via editor
     public int initialLifes = 3;
+
+	public AnimationCurve Difficulty;
 
     private int _lifepoints;
 
@@ -94,4 +95,9 @@ public class GameController : MonoBehaviour
     {
 
     }
+
+	void Update() 
+	{
+
+	}
 }
