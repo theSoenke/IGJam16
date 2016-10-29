@@ -14,7 +14,6 @@ public class DesktopFolderTrash : DesktopFolder
         assignedImage = GetComponent<Image>();
         assignedImage.overrideSprite = assignedSprite;
 
-        elementType = (int)ElementType.Trash;
     }
 
     public string getElementName()
@@ -24,16 +23,5 @@ public class DesktopFolderTrash : DesktopFolder
     public void setElementName(string name)
     {
         elementName = name;
-    }
-
-
-    public int GetElementType()
-    {
-        return elementType;
-    }
-
-    public void SetElementType(int type)
-    {
-        elementType = type;
     }
 }

@@ -1,19 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// Zuweisung an eine Image-Instanz
 public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public string elementName;
-    public int elementType;
     public Color hoverColor = Color.white;
-    public List<Sprite> smilies;
 
     private Color _normalColor;
     private Image _image;
+    private Animator _animator;
+
+    //all the fucking smileys here
+
+    #region  smileys
+
+    public Sprite smileyHappy;
+    public Sprite smileySmiling;
+    public Sprite smileyNeutral;
+    public Sprite smileyAngry;
+    public Sprite smileyRaging;
+
+    #endregion
 
     //Gemütszustand des Kollegen, am Anfang noch Happy
     //je mehr Arbeit er abkriegt, desto wütender wird er
@@ -42,11 +51,25 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         Trash
     };
 
+    private int RageStatusColleague
+    {
+        get
+        {
+            return _rageStatusColleague;
+        }
+
+        set
+        {
+            SynchronizeSpriteWithRageStatus();
+            _rageStatusColleague = value;
+        }
+    }
+
 
     void Start()
     {
-        _assignedImage = GetComponent<Image>();
         _smileyImage = GetComponentInChildren<Image>();
+        _animator = GetComponent<Animator>();
 
         _image = GetComponent<Image>();
         _normalColor = _image.color;
@@ -57,38 +80,34 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         }, null, 0, (int)System.TimeSpan.FromMinutes(1).TotalMilliseconds);
 
 
-        _rageStatusColleague = (int)Smiley.Happy;
+        RageStatusColleague = (int)Smiley.Happy;
 
         //Zuweisung des Sprites zum Image
         SynchronizeSpriteWithRageStatus();
 
-        elementType = (int)ElementType.Folder;
         _workingStateColleague = false;
     }
 
-    void Update()
-    {
-        SynchronizeSpriteWithRageStatus();
-    }
+
 
     private void SynchronizeSpriteWithRageStatus()
     {
-        switch (_rageStatusColleague)
+        switch (RageStatusColleague)
         {
             case 1:
-                _smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_happy");
+                _smileyImage.overrideSprite = smileyHappy;
                 break;
             case 2:
-                _smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_smiling");
+                _smileyImage.overrideSprite = smileySmiling;
                 break;
             case 3:
-                _smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_neutral");
+                _smileyImage.overrideSprite = smileyNeutral;
                 break;
             case 4:
-                _smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_angry");
+                _smileyImage.overrideSprite = smileyAngry;
                 break;
             case 5:
-                _smileyImage.overrideSprite = Resources.Load<Sprite>("Images/smiley_raging");
+                _smileyImage.overrideSprite = smileyRaging;
                 break;
         }
     }
@@ -102,12 +121,12 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     //einen Zeitwert von 1 bis 3
     public void IncreaseRagingStatus(int timeValue)
     {
-        _rageStatusColleague = _rageStatusColleague + timeValue;
+        RageStatusColleague = RageStatusColleague + timeValue;
 
-        if (_rageStatusColleague > 5)
+        if (RageStatusColleague > 5)
         {
             //decrease life
-            _rageStatusColleague = (int)Smiley.Happy;
+            RageStatusColleague = (int)Smiley.Happy;
             GameController.Instance.Lifepoints--;
         }
     }
@@ -115,9 +134,9 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     public void decreaseRagingStatus()
     {
 
-        if ((_rageStatusColleague > (int)Smiley.Happy) && (_workingStateColleague == false))
+        if ((RageStatusColleague > (int)Smiley.Happy) && (_workingStateColleague == false))
         {
-            _rageStatusColleague = _rageStatusColleague - 1;
+            RageStatusColleague = RageStatusColleague - 1;
         }
     }
 
@@ -125,7 +144,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         GameObject itemDragged = DesktopItem.itemDragged;
         itemDragged.transform.SetParent(transform);
-        Destroy(itemDragged);
+        Destroy(itemDragged, 0.5f);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
