@@ -43,8 +43,6 @@ public class ImageFetcher {
 			Debug.Log ("Failed to download image " + path);
 		}
 
-		File.WriteAllBytes(title + ".png", www.bytes);
-
 		_imageReceiver.OnNewImage (title, tex);
 	}
 
@@ -58,14 +56,12 @@ public class ImageFetcher {
 		WWW www = new WWW("https://api.imgur.com/3/gallery/r/funny", null, headers);
 		yield return www;
 
-		Debug.Log ("preparse");
 		var json = JSON.Parse(www.text);
-		Debug.Log ("postparse");
 		var data = json ["data"];
 
 		for (int i = 0; i < data.Count; i++) {
 			var image = data [i];
-			if (!image ["animated"].AsBool) {
+			if (!image ["animated"].AsBool && !image ["is_album"].AsBool) {
 				yield return FetchImage (image ["title"], image ["link"]);
 			}
 		}
