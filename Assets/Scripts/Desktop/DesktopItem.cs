@@ -7,17 +7,19 @@ using UnityEngine.UI;
 public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
+
     public int lifeTimeSec;
 
     public static GameObject itemDragged;
 
-    private Vector3 startPosition;
-    private Transform startParent;
+    private Vector3 _startPosition;
+    private Transform _startParent;
     private float _deadLine;
 
     private Animator _animator;
 
     private const string DEATH_ANIM = "";
+
 
 
 
@@ -27,10 +29,12 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         _animator = GetComponent<Animator>();
 
 
+
     }
 
     private void Update()
     {
+
         if (Time.time > _deadLine)
         {
             Die();
@@ -52,16 +56,16 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnBeginDrag(PointerEventData eventData)
     {
         itemDragged = gameObject;
-        startPosition = transform.position;
-        startParent = transform.parent;
+        _startPosition = transform.position;
+        _startParent = transform.parent;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         itemDragged = null;
-        if (transform.parent == startParent)
+        if (transform.parent == _startParent)
         {
-            transform.position = startPosition;
+            transform.position = _startPosition;
         }
     }
 }
