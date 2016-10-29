@@ -19,7 +19,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     private Color _normalColor;
     private Image _image;
     private Animator _animator;
-    private float nextRageCooldown;
+    private float _nextRageCooldown;
+    private float _workDoneTimestamp = 0;
 
     //all the fucking smileys here
 
@@ -86,7 +87,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         _image = GetComponent<Image>();
         _normalColor = _image.color;
 
-        nextRageCooldown = Time.time + rageCooldown;
+        _nextRageCooldown = Time.time + rageCooldown;
 
 
 
@@ -103,13 +104,18 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         if (!_workingStateColleague)
         {
-            if (Time.time > nextRageCooldown)
+            if (Time.time > _nextRageCooldown)
                 decreaseRagingStatus();
         }
         else
         {
-            nextRageCooldown = Time.time + rageCooldown;
+            _nextRageCooldown = Time.time + rageCooldown;
+            if (Time.time > _workDoneTimestamp)
+            {
+                _workingStateColleague = false;
+            }
         }
+
     }
 
 
@@ -168,7 +174,14 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     public void OnDrop(PointerEventData eventData)
     {
+        if (_workingStateColleague)
+            return;
+
+
         DesktopItem itemDragged = DesktopItem.itemDragged.GetComponent<DesktopItem>();
+
+        _workingStateColleague = true;
+        _workDoneTimestamp = Time.time + itemDragged.workTimeSec;
 
         IncreaseRagingStatus(itemDragged.timeFactor);
         itemDragged.Die();

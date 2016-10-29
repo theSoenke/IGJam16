@@ -8,7 +8,9 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 {
 	public AudioSource _dropSound;
 
-    public int lifeTimeSec;
+    public float lifeTimeSec;
+
+    public float workTimeSec;
 
     //dumb stuff: determinds the rage induced on the coworker dropped on
     [Range(1,3)]
