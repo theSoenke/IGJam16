@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     public string elementName;
     public int elementType;
     public Color hoverColor = Color.white;
+    public List<Sprite> smilies;
 
     private Color _normalColor;
     private Image _image;
@@ -20,13 +22,25 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     //arbeitet der Kollege gerade an einem Projekt?
     private bool _workingStateColleague;
 
-    private DesktopPosition _desktopPosition;
     private Image _assignedImage;
     private Image _smileyImage;
     private Timer timer;
 
-    private enum Smiley { Happy = 1, Smiling = 2, Neutral = 3, Angry = 4, Raging = 5 };
-    private enum ElementType { Folder = 1, Trash = 2, WorkOrder = 3 };
+    private enum Smiley
+    {
+        Happy,
+        Smiling,
+        Neutral,
+        Angry,
+        Raging
+    };
+
+    private enum ElementType
+    {
+        Item,
+        Folder,
+        Trash
+    };
 
 
     void Start()
@@ -57,10 +71,6 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         SynchronizeSpriteWithRageStatus();
     }
 
-    private void UpdateRectTransform()
-    {
-        GetComponent<RectTransform>().position = _desktopPosition.toScreenPosition();
-    }
     private void SynchronizeSpriteWithRageStatus()
     {
         switch (_rageStatusColleague)

@@ -6,20 +6,23 @@ using UnityEngine.UI;
 
 public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public static GameObject itemDragged;
+
     public Image assignedImage;
     public Sprite assignedSprite;
 
-    public Timer deadLineExpiringTimer;
-    public Timer killTimer;
-    public int deadLineInMinutes;
-
-    public static GameObject itemDragged;
-
-    private Vector3 startPosition;
-    private Transform startParent;
+    private int _deadLineInMinutes;
+    private Timer _killTimer;
+    private Timer _deadLineExpiringTimer;
+    private Vector3 _startPosition;
+    private Transform _startParent;
     private int _state;
 
-    private enum StateWorkOrder { New = 1, DeadLineExpiring = 2 };
+    private enum StateWorkOrder
+    {
+        New,
+        DeadLineExpiring
+    };
 
 
     void Start()
@@ -29,10 +32,10 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
         _state = (int)StateWorkOrder.New;
 
-        deadLineExpiringTimer = new Timer(e =>
+        _deadLineExpiringTimer = new Timer(e =>
        {
            ChangeStateToDeadLineExpiring();
-       }, null, 0, (int)System.TimeSpan.FromMinutes(deadLineInMinutes).TotalMilliseconds);
+       }, null, 0, (int)System.TimeSpan.FromMinutes(_deadLineInMinutes).TotalMilliseconds);
 
     }
 
@@ -40,7 +43,7 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         _state = (int)StateWorkOrder.DeadLineExpiring;
 
-        killTimer = new Timer(e =>
+        _killTimer = new Timer(e =>
         {
             //Destroy(gameObject);
         }, null, 0, (int)System.TimeSpan.FromMinutes(1).TotalMilliseconds);
@@ -54,16 +57,16 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnBeginDrag(PointerEventData eventData)
     {
         itemDragged = gameObject;
-        startPosition = transform.position;
-        startParent = transform.parent;
+        _startPosition = transform.position;
+        _startParent = transform.parent;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         itemDragged = null;
-        if (transform.parent == startParent)
+        if (transform.parent == _startParent)
         {
-            transform.position = startPosition;
+            transform.position = _startPosition;
         }
     }
 }
