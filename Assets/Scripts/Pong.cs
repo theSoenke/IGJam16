@@ -7,8 +7,8 @@ public class Pong : MonoBehaviour
 	public Image image;
 	private Texture2D texture;
 
-	const int width = 600;
-	const int height = 450;
+	const int width = 480;
+	const int height = 320;
 
 	const int ballSize = 10;
 	const int flipperHeight = 50;
@@ -108,16 +108,62 @@ public class Pong : MonoBehaviour
 				texture.SetPixel (x, y, c);
 	}
 
-	void ClearScore ()
-	{
-		//DrawFlipperWithColor (new Color (0, 0, 0, 1));
-		//DrawFlipperWithColor (new Color (0, 0, 0, 1));
+	bool[,,] digits = new bool[10,3,5] {
+		{ {true, true, true, true, true}, {true, false, false, false, true}, {true, true, true, true, true} },
+		{ {false, false, false, false, false}, {false, false, false, false, false}, {true, true, true, true, true} },
+		{ {true, false, true, true, true}, {true, false, true, false, true}, {true, true, true, false, true} },
+		{ {true, false, true, false, true}, {true, false, true, false, true}, {true, true, true, true, true} },
+		{ {true, true, true, false, false}, {false, false, true, false, false}, {true, true, true, true, true} },
+		{ {true, true, true, false,true}, {true, false, true, false, true}, {true, false, true, true, true} },
+		{ {true, true, true, true, true}, {true, false, true, false, true}, {true, false, true, true, true} },
+		{ {true, false, false, false, false}, {true, false, false, false, false}, {true, true, true, true, true} },
+		{ {true, true, true, true, true}, {true, false, true, false, true}, {true, true, true, true, true} },
+		{ {true, true, true, false, true}, {true, false, true, false, true}, {true, true, true, true, true} }
+	};
+
+	void DrawDigit(int digit, int baseX, int baseY, Color cc) {
+		for (int i = 0; i < 5; i++)
+			for (int j = 0; j < 3; j++) {
+				if (digits [digit, j,i]) {
+					int digitX = baseX + i * ballSize;
+					int digitY = baseY + j * ballSize;
+					for (int x = 0; x < ballSize; x++)
+						for (int y = 0; y < ballSize; y++)
+							texture.SetPixel (x + digitX, y + digitY, cc);
+				}
+			}
 	}
 
-	void DrawScore ()
+	void DrawScore (int score, Color cc, int baseX)
 	{
-		//DrawFlipperWithColor (new Color (1, 1, 1, 1));
-		//DrawFlipperWithColor (new Color (0, 0, 0, 1));
+		int baseY = ballSize;
+		int cent = (score / 100) % 10;
+		int deca = (score % 100) / 10;
+		int unar = score % 10;
+
+		DrawDigit (cent, baseX, baseY, cc);
+		DrawDigit (deca, baseX, baseY + 4 * ballSize, cc);
+		DrawDigit (unar, baseX, baseY + 8 * ballSize, cc);
+	}
+
+	void DrawScores() {
+		var cc = new Color (0.4f, 0.4f, 0.4f, 1.0f);
+		DrawScore (playerScore, cc, (width - ballSize) / 2 - 6 * ballSize);
+		DrawScore (enemyScore, cc, (width + ballSize) / 2 + ballSize);
+	}
+
+	void ClearScores() {
+		var cc = new Color (0.0f, 0.0f, 0.0f, 1.0f);
+		DrawScore (playerScore, cc, (width - ballSize) / 2 - 6 * ballSize);
+		DrawScore (enemyScore, cc, (width + ballSize) / 2 + ballSize);
+	}
+
+	void DrawDelimiter ()
+	{
+		for(int i=0; i<height; i+=20)
+			for(int x =0; x<10; x++)	
+				for(int y = 0; y<10; y++)
+					texture.SetPixel ((width - ballSize) / 2 + x, i+y, new Color(0.4f,0.4f,0.4f,1.0f));
 	}
 
 	void ResetBall ()
@@ -162,13 +208,12 @@ public class Pong : MonoBehaviour
 		float len = Mathf.Sqrt (dx * dx + dy * dy);
 		float absBall = posY * (float)(height - ballSize) + ballSize / 2.0f;
 		float absFlipper = flipper * (float)(height - flipperHeight) + flipperHeight / 2.0f;
-		float relPos = (float)(absBall - absFlipper) / (0.5f * flipperHeight);
+		float relPos = (float)(absBall - absFlipper) / (0.5f * (flipperHeight + ballSize));
 
 		if (Mathf.Abs (relPos) >= 1.0)
 			return false;
 
 		relPos *= 0.4f * Mathf.PI;
-		Debug.Log (Mathf.Cos (relPos));
 		dx = -Mathf.Sign(dx) * Mathf.Cos (relPos);
 		dy = Mathf.Sin (relPos);
 
@@ -182,17 +227,17 @@ public class Pong : MonoBehaviour
 	{
 		ClearBall ();
 		ClearFlipper ();
-		ClearScore ();
+		ClearScores ();
 
 		// handle player
 
 		dtSinceKeyPress += Time.deltaTime;
 		if (Input.GetKey (KeyCode.UpArrow)) {
-			velY += 0.01f;
+			velY += 0.008f;
 			startVel = velY;
 			dtSinceKeyPress = 0.0f;
 		} else if (Input.GetKey (KeyCode.DownArrow)) {
-			velY -= 0.01f;
+			velY -= 0.008f;
 			startVel = velY;
 			dtSinceKeyPress = 0.0f;
 		} else {
@@ -202,7 +247,7 @@ public class Pong : MonoBehaviour
 				velY = Interpolate (velY, 0.0f, 3.0f * dtSinceKeyPress);
 		}
 
-		velY = Mathf.Clamp (velY, -0.04f, 0.04f);
+		velY = Mathf.Clamp (velY, -0.03f, 0.03f);
 		playerPos += velY;
 
 		if (playerPos > 1.0f) {
@@ -218,8 +263,9 @@ public class Pong : MonoBehaviour
 		// handle enemy
 			
 		float diff = posY - enemyPos;
-		float enemyVelY = Mathf.Clamp (diff, -0.02f, 0.02f);
-		enemyPos += enemyVelY;
+		float enemyVelY = Mathf.Clamp (diff, -0.012f, 0.012f);
+		if(posX*width > width / 2)
+			enemyPos += enemyVelY;
 
 		if (enemyPos > 1.0f) {
 			enemyPos = 1.0f;
@@ -254,7 +300,8 @@ public class Pong : MonoBehaviour
 		if (posY >= 1.0f || posY < 0.0f)
 			dy = -dy;
 
-		DrawScore ();
+		DrawDelimiter ();
+		DrawScores ();
 		DrawBall ();
 		DrawFlipper ();
 		texture.Apply ();
