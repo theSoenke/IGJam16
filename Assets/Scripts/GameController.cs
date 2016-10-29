@@ -10,10 +10,12 @@ public class GameController : MonoBehaviour
 
     public GameObject mainCanvas;
     public GameObject gameOverCanvas;
-
+	public GameObject _pongCanvas;
+	public GameObject _redditCanvas;
 
     private DesktopController _desktopController;
     private Scoreboard _scoreboard;
+	private float _multiplierTimer = 0;
 
     public int Lifepoints
     {
@@ -98,6 +100,17 @@ public class GameController : MonoBehaviour
 
 	void Update() 
 	{
+		_multiplierTimer += Time.deltaTime;
+		if (_multiplierTimer > 5) {
+			_multiplierTimer = 0;
+			updateMultiplier();
+		}
+	}
 
+	void updateMultiplier() 
+	{
+		if (_pongCanvas.activeSelf || _redditCanvas.activeSelf) {
+			ScoreMultiplier *= 2;			
+		}
 	}
 }

@@ -25,7 +25,7 @@ public class DesktopController : MonoBehaviour
 
 	public void Update()
 	{
-		float difficulty = GameController.Instance.Difficulty.Evaluate (Time.time / 60);
+		float difficulty = GameController.Instance.Difficulty.Evaluate (Time.timeSinceLevelLoad / 60);
 		spawnTimer += Time.deltaTime;
 		if (spawnTimer > 10) {
 			spawnTimer = 0f;

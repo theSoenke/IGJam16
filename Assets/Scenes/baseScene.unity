@@ -3115,6 +3115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1375544729}
   gameOverCanvas: {fileID: 721979206}
+  _pongCanvas: {fileID: 265015401}
+  _redditCanvas: {fileID: 1059241836}
   initialLifes: 3
   Difficulty:
     serializedVersion: 2
