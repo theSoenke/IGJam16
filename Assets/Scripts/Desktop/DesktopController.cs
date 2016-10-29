@@ -27,7 +27,6 @@ public class DesktopController : MonoBehaviour
     public void Update()
     {
         isMenuOpen = IsMenuOpen();
-        Debug.Log(isMenuOpen);
 
         float difficulty = GameController.Instance.Difficulty.Evaluate(Time.timeSinceLevelLoad / 60);
         _spawnTimer += Time.deltaTime;
@@ -67,7 +66,6 @@ public class DesktopController : MonoBehaviour
                 var pos = new Vector3(randX, randY, 0);
                 pos.x *= tileWidth;
                 pos.y *= tileHeight;
-                pos += new Vector3(padding, padding, 0);
 
                 GameObject itemObject = (GameObject)Instantiate(itemPrefab);
                 itemObject.transform.SetParent(screen);
@@ -76,5 +74,11 @@ public class DesktopController : MonoBehaviour
                 _itemGrid[randX, randY] = itemObject.GetComponent<DesktopWorkItem>();
             }
         }
+    }
+
+    public void RemoveItem(DesktopWorkItem item)
+    {
+        Vector2 pos = item.GridPosition;
+        _itemGrid[(int)pos.x, (int)pos.y] = null;
     }
 }
