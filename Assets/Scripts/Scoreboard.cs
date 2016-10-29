@@ -23,7 +23,6 @@ public class Scoreboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         _score += scorePerSecond * Time.deltaTime * scoreFactor;
         if (Time.time - _lastDisplayUpdate > refreshTick)
         {
