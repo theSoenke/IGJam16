@@ -22,7 +22,10 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private Animator _animator;
 
+    private bool _warning = false;
+
     private const string DEATH_ANIM = "DestroyItem";
+    private const string WARNING_ANIM = "Flashing";
 
     void Start()
     {
@@ -39,13 +42,20 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             GameController.Instance.Lifepoints--;
             Die();
         }
+
+        if ((_deadLine - Time.time) < (_deadLine/3) && !_warning)
+        {
+            _warning = true;
+            _animator.Play(WARNING_ANIM);
+        }
+
     }
 
     public void Die()
     {
         Destroy(gameObject, 0.5f);
         _startPosition = transform.position;
-        //_animator.Play(DEATH_ANIM);   TODO: fix anim
+        _animator.Play(DEATH_ANIM);   //TODO: fix anim
     }
 
 
