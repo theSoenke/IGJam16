@@ -3,18 +3,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// Zuweisung an eine Image-Instanz
 public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public string elementName;
+
 
     [Tooltip("time to loose one rage point")]
     public float rageCooldown;
 
     public Color hoverColor = Color.white;
 
-    private Color normalColor;
-    private Image image;
+    private Color _normalColor;
+    private Image _image;
     private Animator _animator;
     private float nextRageCooldown;
 
@@ -30,7 +30,6 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     #endregion
 
-
     //Gemütszustand des Kollegen, am Anfang noch Happy
     //je mehr Arbeit er abkriegt, desto wütender wird er
     private int _rageStatusColleague;
@@ -38,12 +37,27 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     //arbeitet der Kollege gerade an einem Projekt?
     private bool _workingStateColleague;
 
+
+
+    private Image _assignedImage;
     private Image _smileyImage;
+    private Timer timer;
 
-   
+    private enum Smiley
+    {
+        Happy,
+        Smiling,
+        Neutral,
+        Angry,
+        Raging
+    };
 
-   
-    public DesktopController DesktopController { get; set; }
+    private enum ElementType
+    {
+        Item,
+        Folder,
+        Trash
+    };
 
 
     private int RageStatusColleague
@@ -59,11 +73,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
             _rageStatusColleague = value;
         }
     }
-
    
 
-    private enum Smiley { Happy = 1, Smiling = 2, Neutral = 3, Angry = 4, Raging = 5 };
-    private enum ElementType { Folder = 1, Trash = 2, WorkOrder = 3 };
 
 
     void Start()
@@ -71,8 +82,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         _smileyImage = GetComponentInChildren<Image>();
         _animator = GetComponent<Animator>();
 
-        image = GetComponent<Image>();
-        normalColor = image.color;
+        _image = GetComponent<Image>();
+        _normalColor = _image.color;
 
         nextRageCooldown = Time.time + rageCooldown;
         
@@ -86,6 +97,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         _workingStateColleague = false;
     }
 
+
     private void Update()
     {
         if (!_workingStateColleague)
@@ -98,6 +110,9 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
             nextRageCooldown = Time.time + rageCooldown;
         }
     }
+
+
+
 
 
     private void SynchronizeSpriteWithRageStatus()
@@ -164,12 +179,12 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         if (DesktopItem.itemDragged != null)
         {
-            image.color = hoverColor;
+            _image.color = hoverColor;
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        image.color = normalColor;
+        _image.color = _normalColor;
     }
 }

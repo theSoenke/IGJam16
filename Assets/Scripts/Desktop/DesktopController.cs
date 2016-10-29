@@ -2,49 +2,50 @@
 
 public class DesktopController : MonoBehaviour
 {
-    public GameObject screen;
-    public GameObject folderPrefab;
+    public Transform screen;
+    public GameObject itemPrefab;
+    public int gridSize = 8;
+    public int spacing = 20;
 
-    public const int ScreenWidth = 800;
-    public const int ScreenHeight = 600;
-    public const int GridSize = 8;
-    public const float TileWidth = ScreenWidth / GridSize;
-    public const float TileHeight = ScreenHeight / GridSize;
-
-    private DesktopElementInterface[,] _grid = new DesktopElementInterface[8, 8];
+    private int _spawnedItems;
+    private DesktopItem[,] _itemGrid;
 
 
     void Start()
     {
+        _itemGrid = new DesktopItem[gridSize, gridSize];
+
         for (int i = 0; i < 8; i++)
         {
-            Instantiate(folderPrefab, screen.transform);
+            SpawnItem();
         }
     }
 
-    DesktopPosition getSnapPosition(Vector2 screenPosition)
+    private void SpawnItem()
     {
-        int x = (int)Mathf.Round(screenPosition.x / TileWidth);
-        int y = (int)Mathf.Round(screenPosition.y / TileHeight);
-        if (_grid[x, y] != null)
-        {
-            return null;
-        }
-        return new DesktopPosition(x, y);
-    }
+        int maxItems = gridSize * gridSize;
 
-    DesktopPosition getEmptyPosition()
-    {
-        for (int y = 0; y < _grid.Length; y++)
+        if (_spawnedItems >= maxItems)
         {
-            for (int x = 0; x < _grid.Length; x++)
+            return;
+        }
+
+        while (true)
+        {
+            int randX = Random.Range(0, gridSize - 1);
+            int randY = Random.Range(0, gridSize - 1);
+
+            if (_itemGrid[randX, randY] == null)
             {
-                if (_grid[x, y] == null)
-                {
-                    return new DesktopPosition(x, y);
-                }
+                var pos = new Vector3(randX, randY, 0);
+                pos *= spacing;
+                pos += screen.position;
+                GameObject itemObject = (GameObject)Instantiate(itemPrefab, pos, Quaternion.identity);
+                itemObject.transform.SetParent(screen);
+                _itemGrid[randX, randY] = itemObject.GetComponent<DesktopItem>();
+                _spawnedItems++;
+                break;
             }
         }
-        return null;
     }
 }
