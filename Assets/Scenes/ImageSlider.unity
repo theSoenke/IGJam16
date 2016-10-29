@@ -664,4 +664,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSliderImage: {fileID: 1973451719}
   nextImageButton: {fileID: 1354346328}
-  timeout: 5
+  timeout: 2
