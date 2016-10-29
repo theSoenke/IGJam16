@@ -10,6 +10,10 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public int lifeTimeSec;
 
+    //dumb stuff: determinds the rage induced on the coworker dropped on
+    [Range(1,3)]
+    public int timeFactor = 1;
+
     public static GameObject itemDragged;
 
     private Vector3 _startPosition;
@@ -43,7 +47,8 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void Die()
     {
         Destroy(gameObject, 0.5f);
-        _animator.Play(DEATH_ANIM);
+        _startPosition = transform.position;
+        //_animator.Play(DEATH_ANIM);   TODO: fix anim
     }
 
 

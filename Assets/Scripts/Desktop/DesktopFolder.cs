@@ -13,6 +13,9 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     public Color hoverColor = Color.white;
 
+    public Image smileyImage;
+
+
     private Color _normalColor;
     private Image _image;
     private Animator _animator;
@@ -40,7 +43,6 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
 
     private Image _assignedImage;
-    private Image _smileyImage;
     private Timer timer;
 
     private enum Smiley
@@ -69,8 +71,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
         set
         {
-            SynchronizeSpriteWithRageStatus();
             _rageStatusColleague = value;
+            SynchronizeSpriteWithRageStatus();
         }
     }
    
@@ -79,7 +81,6 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     void Start()
     {
-        _smileyImage = GetComponentInChildren<Image>();
         _animator = GetComponent<Animator>();
 
         _image = GetComponent<Image>();
@@ -120,19 +121,19 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         switch (RageStatusColleague)
         {
             case 1:
-                _smileyImage.overrideSprite = smileyHappy;
+                smileyImage.overrideSprite = smileyHappy;
                 break;
             case 2:
-                _smileyImage.overrideSprite = smileySmiling;
+                smileyImage.overrideSprite = smileySmiling;
                 break;
             case 3:
-                _smileyImage.overrideSprite = smileyNeutral;
+                smileyImage.overrideSprite = smileyNeutral;
                 break;
             case 4:
-                _smileyImage.overrideSprite = smileyAngry;
+                smileyImage.overrideSprite = smileyAngry;
                 break;
             case 5:
-                _smileyImage.overrideSprite = smileyRaging;
+                smileyImage.overrideSprite = smileyRaging;
                 break;
         }
     }
@@ -169,7 +170,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         DesktopItem itemDragged = DesktopItem.itemDragged.GetComponent<DesktopItem>();
 
-        IncreaseRagingStatus(itemDragged.lifeTimeSec);
+        IncreaseRagingStatus(itemDragged.timeFactor);
         itemDragged.Die();
 
 
