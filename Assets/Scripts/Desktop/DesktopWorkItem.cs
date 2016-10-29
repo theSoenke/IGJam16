@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 
 
-public class DesktopWorkItem : MonoBehaviour, IDesktopItem, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public AudioSource dropSound;
     public float lifeTimeSec;

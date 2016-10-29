@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
-public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Tooltip("time to loose one rage point")]
     public float rageCooldown;
@@ -81,7 +81,6 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
 
 
 
-
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -101,14 +100,13 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
         _workingStateColleague = false;
     }
 
-
     private void Update()
     {
         if (!_workingStateColleague)
         {
             statusBar.Reset();
             if (Time.time > _nextRageCooldown)
-                decreaseRagingStatus();
+                DecreaseRagingStatus();
         }
         else
         {
@@ -120,10 +118,6 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
         }
 
     }
-
-
-
-
 
     private void SynchronizeSpriteWithRageStatus()
     {
@@ -154,7 +148,7 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
 
     //erhöht den RagingStatus des Kollegen um
     //einen Zeitwert von 1 bis 3
-    public void IncreaseRagingStatus(int timeValue)
+    private void IncreaseRagingStatus(int timeValue)
     {
         RageStatusColleague = RageStatusColleague + timeValue;
 
@@ -166,7 +160,7 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
         }
     }
 
-    public void decreaseRagingStatus()
+    private void DecreaseRagingStatus()
     {
 
         if ((RageStatusColleague > (int)Smiley.Happy) && (_workingStateColleague == false))

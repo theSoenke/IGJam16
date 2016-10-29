@@ -4,7 +4,6 @@ public class DesktopController : MonoBehaviour
 {
     public Transform screen;
     public GameObject itemPrefab;
-    public GameObject trashPrefab;
     public int gridSize = 8;
     public int padding = 40;
     public int workOrderAreaWidth = 500;
@@ -13,20 +12,14 @@ public class DesktopController : MonoBehaviour
     public int tileHeight;
 
     private int _spawnedItems;
-    private IDesktopItem[,] _itemGrid;
+    private DesktopWorkItem[,] _itemGrid;
 
 
     void Start()
     {
-        tileWidth = (workOrderAreaWidth - (padding * 2)) / gridSize;
-        tileHeight = (workOrderAreaHeight - (padding * 2)) / gridSize;
-        _itemGrid = new IDesktopItem[gridSize, gridSize];
-        _itemGrid[0, 0] = new DesktopFolderTrash();
-        var pos = new Vector3(0, 0, 0);
-        pos += screen.position;
-        GameObject trashFolder = (GameObject)Instantiate(trashPrefab, pos, Quaternion.identity);
-        _itemGrid[0, 0] = trashFolder.GetComponent<DesktopWorkItem>();
-        trashFolder.transform.SetParent(screen);
+        tileWidth = (workOrderAreaWidth - padding * 2) / gridSize;
+        tileHeight = (workOrderAreaHeight - padding * 2) / gridSize;
+        _itemGrid = new DesktopWorkItem[gridSize, gridSize];
 
         for (int i = 0; i < 8; i++)
         {
