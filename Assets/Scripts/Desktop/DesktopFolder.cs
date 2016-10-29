@@ -170,8 +170,6 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         DesktopItem itemDragged = DesktopItem.itemDragged.GetComponent<DesktopItem>();
 
-        Debug.Log("test");
-
         IncreaseRagingStatus(itemDragged.timeFactor);
         itemDragged.Die();
 
