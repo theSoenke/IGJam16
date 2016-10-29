@@ -7,6 +7,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public AudioSource dropSound;
     public float lifeTimeSec;
     public float workTimeSec;
+	public Vector2 GridPosition { get; set; }
 
     //dumb stuff: determinds the rage induced on the coworker dropped on
     [Range(1, 3)]
@@ -21,6 +22,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Animator _animator;
 
     private bool _warning = false;
+    private bool _dead = false;
 
     private const string DeathAnim = "DestroyItem";
     private const string WarningAnim = "Flashing";
@@ -29,14 +31,14 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         _deadLine = Time.time + lifeTimeSec;
         _animator = GetComponent<Animator>();
-
     }
 
     private void Update()
     {
 
-        if (Time.time > _deadLine)
+        if (Time.time > _deadLine && !_dead)
         {
+            _dead = true;
             GameController.Instance.Lifepoints--;
             Die();
         }
@@ -46,20 +48,31 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             _warning = true;
             _animator.Play(WarningAnim);
         }
+    }
 
+    void OnGUI()
+    {
+        // doubleclick event
+        if (Event.current.isMouse && Event.current.button == 0 && Event.current.clickCount > 1)
+        {
+            //GameController.Instance.ShowWorkingMenu();
+        }
     }
 
     public void Die()
     {
+		GameController.Instance.DesktopController.RemoveItem (this);
         Destroy(gameObject, 0.5f);
         _startPosition = transform.position;
         _animator.Play(DeathAnim);   //TODO: fix anim
     }
 
-
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = eventData.position;
+        if (!DesktopController.isMenuOpen)
+        {
+            transform.position = eventData.position;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)

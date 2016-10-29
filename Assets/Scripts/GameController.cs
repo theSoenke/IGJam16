@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(DesktopController), typeof(Scoreboard))]
 public class GameController : MonoBehaviour
@@ -7,8 +8,15 @@ public class GameController : MonoBehaviour
     public EmailController EmailController { get; private set; }
 
 
+    public GameObject mainCanvas;
+    public GameObject gameOverCanvas;
+    public GameObject pongCanvas;
+    public GameObject redditCanvas;
+    public GameObject workingCanvas;
+
     private DesktopController _desktopController;
     private Scoreboard _scoreboard;
+    private float _multiplierTimer = 0;
 
     public int Lifepoints
     {
@@ -50,11 +58,17 @@ public class GameController : MonoBehaviour
         }
     }
 
-
     // only for initial lifepoint input via editor
     public int initialLifes = 3;
 
+    public AnimationCurve Difficulty;
+
     private int _lifepoints;
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     // Use this for initialization
     private void Awake()
@@ -75,12 +89,36 @@ public class GameController : MonoBehaviour
 
     private void EndGame()
     {
-        //TODO: implement failure state
+        mainCanvas.SetActive(false);
+        gameOverCanvas.SetActive(true);
     }
 
 
     void Start()
     {
+        _lifepoints = initialLifes;
+    }
 
+    void Update()
+    {
+        _multiplierTimer += Time.deltaTime;
+        if (_multiplierTimer > 5)
+        {
+            _multiplierTimer = 0;
+            UpdateMultiplier();
+        }
+    }
+
+    void UpdateMultiplier()
+    {
+        if (pongCanvas.activeSelf || redditCanvas.activeSelf)
+        {
+            ScoreMultiplier *= 2;
+        }
+    }
+
+    public void ShowWorkingMenu()
+    {
+        workingCanvas.SetActive(true);
     }
 }

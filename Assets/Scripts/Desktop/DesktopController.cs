@@ -2,6 +2,8 @@
 
 public class DesktopController : MonoBehaviour
 {
+    public static bool isMenuOpen;
+
     public Transform screen;
     public GameObject itemPrefab;
     public int gridSize = 8;
@@ -11,7 +13,7 @@ public class DesktopController : MonoBehaviour
     public int tileWidth;
     public int tileHeight;
 
-    private int _spawnedItems;
+    private float _spawnTimer;
     private DesktopWorkItem[,] _itemGrid;
 
 
@@ -20,23 +22,41 @@ public class DesktopController : MonoBehaviour
         tileWidth = (workOrderAreaWidth - padding * 2) / gridSize;
         tileHeight = (workOrderAreaHeight - padding * 2) / gridSize;
         _itemGrid = new DesktopWorkItem[gridSize, gridSize];
+    }
 
-        for (int i = 0; i < 8; i++)
+    public void Update()
+    {
+        isMenuOpen = IsMenuOpen();
+
+        float difficulty = GameController.Instance.Difficulty.Evaluate(Time.timeSinceLevelLoad / 60);
+        _spawnTimer += Time.deltaTime;
+        if (_spawnTimer > 10)
         {
-            SpawnItem();
+            _spawnTimer = 0f;
+            SpawnItem(difficulty);
         }
     }
 
-    private void SpawnItem()
+    private bool IsMenuOpen()
     {
-        int maxItems = gridSize * gridSize;
+        GameController gameController = GameController.Instance;
 
-        if (_spawnedItems >= maxItems)
+        if (gameController.gameOverCanvas.activeSelf ||
+            gameController.pongCanvas.activeSelf ||
+            gameController.redditCanvas.activeSelf ||
+            gameController.workingCanvas.activeSelf)
         {
-            return;
+            return true;
         }
+        return false;
+    }
 
-        while (true)
+    private void SpawnItem(float difficulty)
+    {
+        int itemsToSpawn = (int)Mathf.Ceil(difficulty * 10);
+        Debug.Log("Spawning " + itemsToSpawn + " items");
+
+        for (int i = 0; i < difficulty; i++)
         {
             int randX = Random.Range(0, gridSize - 1);
             int randY = Random.Range(0, gridSize - 1);
@@ -44,20 +64,21 @@ public class DesktopController : MonoBehaviour
             if (_itemGrid[randX, randY] == null)
             {
                 var pos = new Vector3(randX, randY, 0);
-                Debug.Log(pos);
                 pos.x *= tileWidth;
                 pos.y *= tileHeight;
-                Debug.Log(pos);
-                Debug.Log(padding);
-                pos += new Vector3(padding, padding, 0);
-                Debug.Log("after " + pos);
+
                 GameObject itemObject = (GameObject)Instantiate(itemPrefab);
                 itemObject.transform.SetParent(screen);
                 itemObject.transform.localPosition = pos;
+
                 _itemGrid[randX, randY] = itemObject.GetComponent<DesktopWorkItem>();
-                _spawnedItems++;
-                break;
             }
         }
+    }
+
+    public void RemoveItem(DesktopWorkItem item)
+    {
+        Vector2 pos = item.GridPosition;
+        _itemGrid[(int)pos.x, (int)pos.y] = null;
     }
 }
