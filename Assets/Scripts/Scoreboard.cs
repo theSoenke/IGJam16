@@ -23,11 +23,14 @@ public class Scoreboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		Debug.Log (_score);
         _score += scorePerSecond * Time.deltaTime * scoreFactor;
+
         if (Time.time - _lastDisplayUpdate > refreshTick)
         {
             _lastDisplayUpdate = Time.time;
-            scoreDisplay.text = Mathf.RoundToInt(_score).ToString();
+			string text = "" + GameController.Instance.Lifepoints + " lives | " + scoreFactor + "x | " + Mathf.Floor(_score);
+			scoreDisplay.text = text;
         }
     }
 }

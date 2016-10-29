@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-
+		_lifepoints = initialLifes;
     }
 
 	void Update() 
