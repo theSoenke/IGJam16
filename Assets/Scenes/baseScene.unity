@@ -3099,7 +3099,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scorePerSecond: 1
   scoreFactor: 1
-  refreshTick: 1
   scoreDisplay: {fileID: 329578747}
 --- !u!114 &1670338354
 MonoBehaviour:
@@ -3115,15 +3114,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1375544729}
   gameOverCanvas: {fileID: 721979206}
-  _pongCanvas: {fileID: 265015401}
-  _redditCanvas: {fileID: 1059241836}
+  _pongCanvas: {fileID: 0}
+  _redditCanvas: {fileID: 0}
   initialLifes: 3
   Difficulty:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!224 &1670338355
 RectTransform:
   m_ObjectHideFlags: 0
