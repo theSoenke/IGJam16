@@ -177,12 +177,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &185498955 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000013762615462, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-    type: 2}
-  m_PrefabInternal: {fileID: 2019484829}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &329578745
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,21 +484,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000011750362934, guid: 6f706e7eb95be704ca06225417a1f791,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 3.0171926
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000011750362934, guid: 6f706e7eb95be704ca06225417a1f791,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 3.0171952
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000011750362934, guid: 6f706e7eb95be704ca06225417a1f791,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 3.0171952
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f706e7eb95be704ca06225417a1f791, type: 2}
@@ -839,87 +818,7 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114000013762615462, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013762615462, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013762615462, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e265153ec23889e4aaaacffacf25e67e,
-        type: 3}
-    - target: {fileID: 224000013889722100, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 3.8189402
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013889722100, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 3.818938
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013889722100, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 3.818938
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013317767346, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: smileyHappy
-      value: 
-      objectReference: {fileID: 21300000, guid: e265153ec23889e4aaaacffacf25e67e,
-        type: 3}
-    - target: {fileID: 114000013317767346, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: smileySmiling
-      value: 
-      objectReference: {fileID: 21300000, guid: f884edabda78f8446b6e86449029dcd7,
-        type: 3}
-    - target: {fileID: 114000013317767346, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: smileyNeutral
-      value: 
-      objectReference: {fileID: 21300000, guid: 36c78b16205410849a4c2c031698361f,
-        type: 3}
-    - target: {fileID: 114000013317767346, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: smileyAngry
-      value: 
-      objectReference: {fileID: 21300000, guid: b1b7d53e9d97f5947abeec10370e17fb,
-        type: 3}
-    - target: {fileID: 114000013317767346, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: smileyRaging
-      value: 
-      objectReference: {fileID: 21300000, guid: c94be17e3385a5f4b9bfd7420817cde5,
-        type: 3}
-    - target: {fileID: 114000013317767346, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: rageCooldown
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013317767346, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
-        type: 2}
-      propertyPath: smileyImage
-      value: 
-      objectReference: {fileID: 185498955}
-    - target: {fileID: 1000014285740422, guid: 4e8f183fc4e52c4448ab017b44c7b0ef, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012040683722, guid: 4e8f183fc4e52c4448ab017b44c7b0ef, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114000010246269340, guid: 4e8f183fc4e52c4448ab017b44c7b0ef, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e8f183fc4e52c4448ab017b44c7b0ef, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &2019484830 stripped
