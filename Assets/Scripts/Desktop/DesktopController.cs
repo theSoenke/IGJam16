@@ -47,10 +47,10 @@ public class DesktopController : MonoBehaviour
                 Debug.Log(pos);
                 pos.x *= tileWidth;
                 pos.y *= tileHeight;
-                Debug.Log(pos);
-                Debug.Log(padding);
+                //Debug.Log(pos);
+                //Debug.Log(padding);
                 pos += new Vector3(padding, padding, 0);
-                Debug.Log("after " + pos);
+                //Debug.Log("after " + pos);
                 GameObject itemObject = (GameObject)Instantiate(itemPrefab);
                 itemObject.transform.SetParent(screen);
                 itemObject.transform.localPosition = pos;
