@@ -47,7 +47,7 @@ public class DesktopElementWorkOrder : MonoBehaviour {
 
 		killTimer = new Timer (e => {
 			Destroy(gameObject);
-		}, null, (int)System.TimeSpan.FromMinutes (1).TotalMilliseconds);
+		}, null,0, (int)System.TimeSpan.FromMinutes (1).TotalMilliseconds);
 
 		
 	}
