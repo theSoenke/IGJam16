@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(DesktopController), typeof(Scoreboard))]
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
     public EmailController EmailController { get; private set; }
+
+
+    public GameObject mainCanvas;
+    public GameObject gameOverCanvas;
 
 
     private DesktopController _desktopController;
@@ -56,6 +61,11 @@ public class GameController : MonoBehaviour
 
     private int _lifepoints;
 
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     // Use this for initialization
     private void Awake()
     {
@@ -75,7 +85,8 @@ public class GameController : MonoBehaviour
 
     private void EndGame()
     {
-        //TODO: implement failure state
+        mainCanvas.SetActive(false);
+        gameOverCanvas.SetActive(true);
     }
 
 
