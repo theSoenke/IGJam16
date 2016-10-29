@@ -9,10 +9,13 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
     [Tooltip("time to loose one rage point")]
     public float rageCooldown;
 
+    public string name;
+
     public Color hoverColor = Color.white;
 
     public Image smileyImage;
     public StatusBar statusBar;
+    public Text text;
 
 
     private Color _normalColor;
@@ -87,7 +90,7 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
         _normalColor = _image.color;
 
         _nextRageCooldown = Time.time + rageCooldown;
-
+        text.text = name;
 
 
         RageStatusColleague = (int)Smiley.Happy;
@@ -103,6 +106,7 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
     {
         if (!_workingStateColleague)
         {
+            statusBar.Reset();
             if (Time.time > _nextRageCooldown)
                 decreaseRagingStatus();
         }

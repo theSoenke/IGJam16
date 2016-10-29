@@ -15,6 +15,11 @@ public class StatusBar : MonoBehaviour
         unitsPerSecond = 0.2618529f / duration;
     }
 
+    public void Reset()
+    {
+        Fg.localScale = new Vector3(0.2618529f, Fg.localScale.y, Fg.localScale.z);
+    }
+
     // Update is called once per frame
     void Update()
     {
