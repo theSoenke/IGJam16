@@ -209,7 +209,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19, y: 220}
+  m_AnchoredPosition: {x: 39, y: 184.27}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &329578747
@@ -244,7 +244,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: :)
 --- !u!222 &329578748
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -717,6 +717,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scorePerSecond: 1
+  scoreFactor: 1
+  refreshTick: 1
   scoreDisplay: {fileID: 329578747}
 --- !u!1 &2058476169
 GameObject:
