@@ -1824,8 +1824,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screen: {fileID: 2058476170}
   itemPrefab: {fileID: 1000013751465628, guid: 6f706e7eb95be704ca06225417a1f791, type: 2}
-  trashPrefab: {fileID: 1000012040683722, guid: 55c810c07a6f1f24a9258a439a498d48,
-    type: 2}
   gridSize: 8
   padding: 50
   workOrderAreaWidth: 500
@@ -2106,7 +2104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
