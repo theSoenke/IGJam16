@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class DropReceiver : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public Color hoverColor;
+    public Color hoverColor = Color.white;
 
     private Color normalColor;
     private Image image;
@@ -25,7 +25,10 @@ public class DropReceiver : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        image.color = hoverColor;
+        if (DragHandler.itemDragged != null)
+        {
+            image.color = hoverColor;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
