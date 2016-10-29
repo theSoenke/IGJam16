@@ -177,10 +177,12 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         if (_workingStateColleague)
             return;
 
+
         DesktopItem itemDragged = DesktopItem.itemDragged.GetComponent<DesktopItem>();
 
         _workingStateColleague = true;
         _workDoneTimestamp = Time.time + itemDragged.workTimeSec;
+
         IncreaseRagingStatus(itemDragged.timeFactor);
         itemDragged.Die();
 
