@@ -1446,7 +1446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.47794116, g: 0.891988, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1813,7 +1813,6 @@ GameObject:
   - 224: {fileID: 1351493424}
   - 222: {fileID: 1351493427}
   - 114: {fileID: 1351493426}
-  - 114: {fileID: 1351493425}
   m_Layer: 5
   m_Name: PongButton
   m_TagString: Untagged
@@ -1840,17 +1839,6 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: -7.5000153}
   m_SizeDelta: {x: 30, y: 15}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1351493425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1351493423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7169628f3706424b8793e626da7d541, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1351493426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2557,14 +2545,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.47794116, g: 0.891988, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 50cfaba5293d5244884cfb4853856d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee7da2b8f5044fd4ea5de2f1fe4322ed, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
