@@ -12,6 +12,7 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
     public Color hoverColor = Color.white;
 
     public Image smileyImage;
+    public StatusBar statusBar;
 
 
     private Color _normalColor;
@@ -179,6 +180,8 @@ public class DesktopFolder : MonoBehaviour, IDesktopItem, IDropHandler, IPointer
         DesktopWorkItem itemDragged = DesktopWorkItem.itemDragged.GetComponent<DesktopWorkItem>();
 
         _workingStateColleague = true;
+        statusBar.duration = itemDragged.workTimeSec;
+        statusBar.gameObject.SetActive(true);
         _workDoneTimestamp = Time.time + itemDragged.workTimeSec;
 
         IncreaseRagingStatus(itemDragged.timeFactor);
