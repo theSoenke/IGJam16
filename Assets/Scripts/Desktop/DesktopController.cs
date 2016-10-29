@@ -6,7 +6,11 @@ public class DesktopController : MonoBehaviour
     public GameObject itemPrefab;
     public GameObject trashPrefab;
     public int gridSize = 8;
-    public int spacing = 20;
+	public int padding = 40;
+	public int workOrderAreaWidth = 500;
+	public int workOrderAreaHeight = 600;
+	public int tileWidth;
+	public int tileHeight;
 
     private int _spawnedItems;
     private IDesktopItem[,] _itemGrid;
@@ -14,6 +18,8 @@ public class DesktopController : MonoBehaviour
 
     void Start()
     {
+		tileWidth = (workOrderAreaWidth - (padding * 2)) / gridSize;
+		tileHeight = (workOrderAreaHeight - (padding * 2)) / gridSize;
         _itemGrid = new IDesktopItem[gridSize, gridSize];
         _itemGrid[0, 0] = new DesktopFolderTrash();
         var pos = new Vector3(0, 0, 0);
@@ -45,11 +51,17 @@ public class DesktopController : MonoBehaviour
             if (_itemGrid[randX, randY] == null)
             {
                 var pos = new Vector3(randX, randY, 0);
-                pos *= spacing;
-                pos += screen.position;
-                GameObject itemObject = (GameObject)Instantiate(itemPrefab, pos, Quaternion.identity);
+				Debug.Log (pos);
+				pos.x *= tileWidth;
+				pos.y *= tileHeight;
+				Debug.Log (pos);
+				Debug.Log (padding);
+				pos += new Vector3 (padding, padding, 0);
+				Debug.Log ("after " + pos.ToString());
+                GameObject itemObject = (GameObject)Instantiate(itemPrefab);
                 itemObject.transform.SetParent(screen);
-                _itemGrid[randX, randY] = itemObject.GetComponent<DesktopWorkItem>();
+				itemObject.transform.localPosition = pos;
+				_itemGrid[randX, randY] = itemObject.GetComponent<DesktopWorkItem>();
                 _spawnedItems++;
                 break;
             }
