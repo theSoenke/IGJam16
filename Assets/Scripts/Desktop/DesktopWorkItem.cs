@@ -51,6 +51,15 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     }
 
+    void OnGUI()
+    {
+        // doubleclick event
+        if (Event.current.isMouse && Event.current.button == 0 && Event.current.clickCount > 1)
+        {
+            GameController.Instance.ShowWorkingMenu();
+        }
+    }
+
     public void Die()
     {
         Destroy(gameObject, 0.5f);

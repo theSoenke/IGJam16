@@ -10,12 +10,13 @@ public class GameController : MonoBehaviour
 
     public GameObject mainCanvas;
     public GameObject gameOverCanvas;
-	public GameObject _pongCanvas;
-	public GameObject _redditCanvas;
+    public GameObject pongCanvas;
+    public GameObject redditCanvas;
+    public GameObject workingCanvas;
 
     private DesktopController _desktopController;
     private Scoreboard _scoreboard;
-	private float _multiplierTimer = 0;
+    private float _multiplierTimer = 0;
 
     public int Lifepoints
     {
@@ -60,7 +61,7 @@ public class GameController : MonoBehaviour
     // only for initial lifepoint input via editor
     public int initialLifes = 3;
 
-	public AnimationCurve Difficulty;
+    public AnimationCurve Difficulty;
 
     private int _lifepoints;
 
@@ -95,22 +96,29 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-		_lifepoints = initialLifes;
+        _lifepoints = initialLifes;
     }
 
-	void Update() 
-	{
-		_multiplierTimer += Time.deltaTime;
-		if (_multiplierTimer > 5) {
-			_multiplierTimer = 0;
-			updateMultiplier();
-		}
-	}
+    void Update()
+    {
+        _multiplierTimer += Time.deltaTime;
+        if (_multiplierTimer > 5)
+        {
+            _multiplierTimer = 0;
+            UpdateMultiplier();
+        }
+    }
 
-	void updateMultiplier() 
-	{
-		if (_pongCanvas.activeSelf || _redditCanvas.activeSelf) {
-			ScoreMultiplier *= 2;			
-		}
-	}
+    void UpdateMultiplier()
+    {
+        if (pongCanvas.activeSelf || redditCanvas.activeSelf)
+        {
+            ScoreMultiplier *= 2;
+        }
+    }
+
+    public void ShowWorkingMenu()
+    {
+        workingCanvas.SetActive(true);
+    }
 }
