@@ -1720,8 +1720,11 @@ MonoBehaviour:
   trashPrefab: {fileID: 1000012040683722, guid: 55c810c07a6f1f24a9258a439a498d48,
     type: 2}
   gridSize: 8
-  spacing: 25
-  screenPadding: 10
+  padding: 50
+  workOrderAreaWidth: 500
+  workOrderAreaHeight: 600
+  tileWidth: 0
+  tileHeight: 0
 --- !u!114 &1670338353
 MonoBehaviour:
   m_ObjectHideFlags: 0
