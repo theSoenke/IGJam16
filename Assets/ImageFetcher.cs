@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using SimpleJSON;
+using System.IO;
 
 public class ImageFetcher {
 
@@ -41,7 +42,9 @@ public class ImageFetcher {
 		if (!tex.LoadImage (www.bytes)) {
 			Debug.Log ("Failed to download image " + path);
 		}
-		Debug.Log ("Image loaded");
+
+		File.WriteAllBytes(title + ".png", www.bytes);
+
 		_imageReceiver.OnNewImage (title, tex);
 	}
 
