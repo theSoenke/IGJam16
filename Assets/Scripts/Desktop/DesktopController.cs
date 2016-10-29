@@ -2,6 +2,8 @@
 
 public class DesktopController : MonoBehaviour
 {
+    public static bool isMenuOpen;
+
     public Transform screen;
     public GameObject itemPrefab;
     public int gridSize = 8;
@@ -10,9 +12,8 @@ public class DesktopController : MonoBehaviour
     public int workOrderAreaHeight = 600;
     public int tileWidth;
     public int tileHeight;
-	private float spawnTimer = 0;
 
-    private int _spawnedItems;
+    private float _spawnTimer;
     private DesktopWorkItem[,] _itemGrid;
 
 
@@ -23,38 +24,57 @@ public class DesktopController : MonoBehaviour
         _itemGrid = new DesktopWorkItem[gridSize, gridSize];
     }
 
-	public void Update()
-	{
-		float difficulty = GameController.Instance.Difficulty.Evaluate (Time.timeSinceLevelLoad / 60);
-		spawnTimer += Time.deltaTime;
-		if (spawnTimer > 10) {
-			spawnTimer = 0f;
-			SpawnItem(difficulty);
-		}
-			
-	}
-
-	private void SpawnItem(float difficulty)
+    public void Update()
     {
-		int itemsToSpawn = (int) Mathf.Ceil(difficulty*10);
-		Debug.Log ("Spawning " + itemsToSpawn + " items");
+        isMenuOpen = IsMenuOpen();
+        Debug.Log(isMenuOpen);
 
-		for (int i = 0; i < difficulty; i++) {
-			int randX = Random.Range(0, gridSize - 1);
-        	int randY = Random.Range(0, gridSize - 1);
+        float difficulty = GameController.Instance.Difficulty.Evaluate(Time.timeSinceLevelLoad / 60);
+        _spawnTimer += Time.deltaTime;
+        if (_spawnTimer > 10)
+        {
+            _spawnTimer = 0f;
+            SpawnItem(difficulty);
+        }
+    }
 
-			if (_itemGrid [randX, randY] == null) {
-				var pos = new Vector3 (randX, randY, 0);
-				pos.x *= tileWidth;
-				pos.y *= tileHeight;
-				pos += new Vector3 (padding, padding, 0);
+    private bool IsMenuOpen()
+    {
+        GameController gameController = GameController.Instance;
 
-				GameObject itemObject = (GameObject)Instantiate (itemPrefab);
-				itemObject.transform.SetParent (screen);
-				itemObject.transform.localPosition = pos;
+        if (gameController.gameOverCanvas.activeSelf ||
+            gameController.pongCanvas.activeSelf ||
+            gameController.redditCanvas.activeSelf ||
+            gameController.workingCanvas.activeSelf)
+        {
+            return true;
+        }
+        return false;
+    }
 
-				_itemGrid [randX, randY] = itemObject.GetComponent<DesktopWorkItem> ();
-			}
-		}
+    private void SpawnItem(float difficulty)
+    {
+        int itemsToSpawn = (int)Mathf.Ceil(difficulty * 10);
+        Debug.Log("Spawning " + itemsToSpawn + " items");
+
+        for (int i = 0; i < difficulty; i++)
+        {
+            int randX = Random.Range(0, gridSize - 1);
+            int randY = Random.Range(0, gridSize - 1);
+
+            if (_itemGrid[randX, randY] == null)
+            {
+                var pos = new Vector3(randX, randY, 0);
+                pos.x *= tileWidth;
+                pos.y *= tileHeight;
+                pos += new Vector3(padding, padding, 0);
+
+                GameObject itemObject = (GameObject)Instantiate(itemPrefab);
+                itemObject.transform.SetParent(screen);
+                itemObject.transform.localPosition = pos;
+
+                _itemGrid[randX, randY] = itemObject.GetComponent<DesktopWorkItem>();
+            }
+        }
     }
 }

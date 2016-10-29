@@ -30,7 +30,6 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         _deadLine = Time.time + lifeTimeSec;
         _animator = GetComponent<Animator>();
-
     }
 
     private void Update()
@@ -48,7 +47,6 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             _warning = true;
             _animator.Play(WarningAnim);
         }
-
     }
 
     void OnGUI()
@@ -56,7 +54,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         // doubleclick event
         if (Event.current.isMouse && Event.current.button == 0 && Event.current.clickCount > 1)
         {
-            GameController.Instance.ShowWorkingMenu();
+            //GameController.Instance.ShowWorkingMenu();
         }
     }
 
@@ -67,10 +65,12 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         _animator.Play(DeathAnim);   //TODO: fix anim
     }
 
-
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = eventData.position;
+        if (!DesktopController.isMenuOpen)
+        {
+            transform.position = eventData.position;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
