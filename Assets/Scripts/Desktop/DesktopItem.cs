@@ -59,10 +59,12 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         itemDragged = gameObject;
         _startPosition = transform.position;
         _startParent = transform.parent;
+		GetComponent<CanvasGroup> ().blocksRaycasts = false;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+		GetComponent<CanvasGroup> ().blocksRaycasts = true;
         itemDragged = null;
         if (transform.parent == _startParent)
         {
