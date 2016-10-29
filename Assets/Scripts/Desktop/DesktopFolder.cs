@@ -75,7 +75,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
             SynchronizeSpriteWithRageStatus();
         }
     }
-   
+
 
 
 
@@ -87,7 +87,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         _normalColor = _image.color;
 
         nextRageCooldown = Time.time + rageCooldown;
-        
+
 
 
         RageStatusColleague = (int)Smiley.Happy;
@@ -103,7 +103,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         if (!_workingStateColleague)
         {
-            if(Time.time > nextRageCooldown)
+            if (Time.time > nextRageCooldown)
                 decreaseRagingStatus();
         }
         else
@@ -170,10 +170,12 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         DesktopItem itemDragged = DesktopItem.itemDragged.GetComponent<DesktopItem>();
 
+        Debug.Log("test");
+
         IncreaseRagingStatus(itemDragged.timeFactor);
         itemDragged.Die();
 
-		GetComponent<AudioSource> ().Play ();
+        GetComponent<AudioSource>().Play();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
