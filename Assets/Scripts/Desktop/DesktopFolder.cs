@@ -6,11 +6,17 @@ using UnityEngine.UI;
 public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public string elementName;
+
+
+    [Tooltip("time to loose one rage point")]
+    public float rageCooldown;
+
     public Color hoverColor = Color.white;
 
     private Color _normalColor;
     private Image _image;
     private Animator _animator;
+    private float nextRageCooldown;
 
     //all the fucking smileys here
 
@@ -30,6 +36,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     //arbeitet der Kollege gerade an einem Projekt?
     private bool _workingStateColleague;
+
+
 
     private Image _assignedImage;
     private Image _smileyImage;
@@ -51,6 +59,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         Trash
     };
 
+
     private int RageStatusColleague
     {
         get
@@ -64,6 +73,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
             _rageStatusColleague = value;
         }
     }
+   
+
 
 
     void Start()
@@ -74,10 +85,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         _image = GetComponent<Image>();
         _normalColor = _image.color;
 
-        timer = new Timer((e) =>
-        {
-            decreaseRagingStatus();
-        }, null, 0, (int)System.TimeSpan.FromMinutes(1).TotalMilliseconds);
+        nextRageCooldown = Time.time + rageCooldown;
+        
 
 
         RageStatusColleague = (int)Smiley.Happy;
@@ -87,6 +96,22 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
         _workingStateColleague = false;
     }
+
+
+    private void Update()
+    {
+        if (!_workingStateColleague)
+        {
+            if(Time.time > nextRageCooldown)
+                decreaseRagingStatus();
+        }
+        else
+        {
+            nextRageCooldown = Time.time + rageCooldown;
+        }
+    }
+
+
 
 
 
@@ -142,9 +167,12 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     public void OnDrop(PointerEventData eventData)
     {
-        GameObject itemDragged = DesktopItem.itemDragged;
-        itemDragged.transform.SetParent(transform);
-        Destroy(itemDragged, 0.5f);
+        DesktopItem itemDragged = DesktopItem.itemDragged.GetComponent<DesktopItem>();
+
+        IncreaseRagingStatus(itemDragged.lifeTimeSec);
+        itemDragged.Die();
+
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
