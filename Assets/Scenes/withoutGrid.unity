@@ -408,7 +408,7 @@ Prefab:
     - target: {fileID: 224000011750362934, guid: 6f706e7eb95be704ca06225417a1f791,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -13.5
       objectReference: {fileID: 0}
     - target: {fileID: 224000011750362934, guid: 6f706e7eb95be704ca06225417a1f791,
         type: 2}
@@ -433,7 +433,7 @@ Prefab:
     - target: {fileID: 224000011750362934, guid: 6f706e7eb95be704ca06225417a1f791,
         type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224000011750362934, guid: 6f706e7eb95be704ca06225417a1f791,
         type: 2}
@@ -550,6 +550,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!1 &1130895690 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012040683722, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
+    type: 2}
+  m_PrefabInternal: {fileID: 2019484829}
+--- !u!65 &1130895691
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1130895690}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50.41, y: 40.04, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1375544729
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +758,7 @@ Prefab:
     - target: {fileID: 224000010495351304, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 16.7
       objectReference: {fileID: 0}
     - target: {fileID: 224000010495351304, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
         type: 2}
@@ -766,7 +783,7 @@ Prefab:
     - target: {fileID: 224000010495351304, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010495351304, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
         type: 2}
@@ -854,8 +871,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 360772443}
   - {fileID: 2019484830}
+  - {fileID: 360772443}
   m_Father: {fileID: 419996237}
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
