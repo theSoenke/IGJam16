@@ -5,6 +5,8 @@ public class DropReceiver : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("on drop");
+        GameObject itemDragged = DragHandler.itemDragged;
+        itemDragged.transform.SetParent(transform);
+        Destroy(itemDragged);
     }
 }
