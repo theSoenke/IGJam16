@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
+	public AudioSource _dropSound;
 
     public int lifeTimeSec;
 
@@ -23,9 +23,6 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private Animator _animator;
 
     private const string DEATH_ANIM = "DestroyItem";
-
-
-
 
     void Start()
     {

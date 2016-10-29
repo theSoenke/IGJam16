@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public string elementName;
-
 
     [Tooltip("time to loose one rage point")]
     public float rageCooldown;
@@ -173,7 +173,7 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         IncreaseRagingStatus(itemDragged.timeFactor);
         itemDragged.Die();
 
-
+		GetComponent<AudioSource> ().Play ();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
