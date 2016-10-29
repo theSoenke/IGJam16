@@ -18,7 +18,7 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private Animator _animator;
 
-    private const string DEATH_ANIM = "";
+    private const string DEATH_ANIM = "DestroyItem";
 
 
 
@@ -28,8 +28,6 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         _deadLine = Time.time + lifeTimeSec;
         _animator = GetComponent<Animator>();
 
-
-
     }
 
     private void Update()
@@ -37,11 +35,12 @@ public class DesktopItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
         if (Time.time > _deadLine)
         {
+            GameController.Instance.Lifepoints--;
             Die();
         }
     }
 
-    private void Die()
+    public void Die()
     {
         Destroy(gameObject, 0.5f);
         _animator.Play(DEATH_ANIM);

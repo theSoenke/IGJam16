@@ -7,11 +7,16 @@ using UnityEngine.UI;
 public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public string elementName;
+
+    [Tooltip("time to loose one rage point")]
+    public float rageCooldown;
+
     public Color hoverColor = Color.white;
 
     private Color normalColor;
     private Image image;
     private Animator _animator;
+    private float nextRageCooldown;
 
     //all the fucking smileys here
 
@@ -33,27 +38,13 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     //arbeitet der Kollege gerade an einem Projekt?
     private bool _workingStateColleague;
 
-    private DesktopPosition _desktopPosition;
     private Image _smileyImage;
 
-    //Dieser Timer aktualisiert den rageStatus des Kollegen
-    private Timer timer;
+   
 
-    public DesktopPosition DesktopPosition
-    {
-        get
-        {
-            return _desktopPosition;
-        }
-        set
-        {
-            _desktopPosition = value;
-            UpdateRectTransform();
-        }
-    }
+   
     public DesktopController DesktopController { get; set; }
 
-    public Vector2 FolderScreenPosition { get; set; }
 
     private int RageStatusColleague
     {
@@ -69,6 +60,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         }
     }
 
+   
+
     private enum Smiley { Happy = 1, Smiling = 2, Neutral = 3, Angry = 4, Raging = 5 };
     private enum ElementType { Folder = 1, Trash = 2, WorkOrder = 3 };
 
@@ -81,10 +74,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         image = GetComponent<Image>();
         normalColor = image.color;
 
-        timer = new Timer((e) =>
-        {
-            decreaseRagingStatus();
-        }, null, 0, (int)System.TimeSpan.FromMinutes(1).TotalMilliseconds);
+        nextRageCooldown = Time.time + rageCooldown;
+        
 
 
         RageStatusColleague = (int)Smiley.Happy;
@@ -95,12 +86,19 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         _workingStateColleague = false;
     }
 
-    
-
-    private void UpdateRectTransform()
+    private void Update()
     {
-        GetComponent<RectTransform>().position = _desktopPosition.toScreenPosition();
+        if (!_workingStateColleague)
+        {
+            if(Time.time > nextRageCooldown)
+                decreaseRagingStatus();
+        }
+        else
+        {
+            nextRageCooldown = Time.time + rageCooldown;
+        }
     }
+
 
     private void SynchronizeSpriteWithRageStatus()
     {
@@ -154,9 +152,12 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
 
     public void OnDrop(PointerEventData eventData)
     {
-        GameObject itemDragged = DesktopItem.itemDragged;
-        itemDragged.transform.SetParent(transform);
-        Destroy(itemDragged, 0.5f);
+        DesktopItem itemDragged = DesktopItem.itemDragged.GetComponent<DesktopItem>();
+
+        IncreaseRagingStatus(itemDragged.lifeTimeSec);
+        itemDragged.Die();
+
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
