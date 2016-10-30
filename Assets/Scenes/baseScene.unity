@@ -568,6 +568,11 @@ Prefab:
       propertyPath: name
       value: "S\xF6nke"
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013654117858, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
+        type: 2}
+      propertyPath: disableAfterwards
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e8f183fc4e52c4448ab017b44c7b0ef, type: 2}
   m_IsPrefabParent: 0
@@ -3069,6 +3074,11 @@ Prefab:
       propertyPath: m_Name
       value: Folder
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013654117858, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
+        type: 2}
+      propertyPath: disableAfterwards
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e8f183fc4e52c4448ab017b44c7b0ef, type: 2}
   m_IsPrefabParent: 0
@@ -3585,6 +3595,11 @@ Prefab:
     - target: {fileID: 1000012040683722, guid: 4e8f183fc4e52c4448ab017b44c7b0ef, type: 2}
       propertyPath: m_Name
       value: Folder
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013654117858, guid: 4e8f183fc4e52c4448ab017b44c7b0ef,
+        type: 2}
+      propertyPath: disableAfterwards
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e8f183fc4e52c4448ab017b44c7b0ef, type: 2}
