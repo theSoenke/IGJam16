@@ -23,6 +23,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     private bool _warning = false;
     private bool _dead = false;
+    public bool _beingWorkedOn = false;
 
     private const string DeathAnim = "DestroyItem";
     private const string WarningAnim = "Flashing";
@@ -37,14 +38,14 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private void Update()
     {
 
-        if (Time.time > _deadLine && !_dead)
+        if (Time.time > _deadLine && !_dead && !_beingWorkedOn)
         {
             _dead = true;
             GameController.Instance.Lifepoints--;
             Die();
         }
 
-        if ((_deadLine - Time.time) < (lifeTimeSec / 3) && !_warning)
+        if ((_deadLine - Time.time) < (lifeTimeSec / 3) && !_warning && !_beingWorkedOn)
         {
             _warning = true;
             _animator.Play(WarningAnim);
@@ -57,6 +58,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (Event.current.isMouse && Event.current.button == 0 && Event.current.clickCount == 2)
         {
             GameController.Instance.ShowWorkingMenu(workTimeSec, gameObject);
+            _beingWorkedOn = true;
         }
     }
 
