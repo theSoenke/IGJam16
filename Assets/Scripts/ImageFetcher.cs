@@ -49,7 +49,7 @@ public class ImageFetcher
 
         var json = JSON.Parse(www.text);
         var data = json["data"];
-		Debug.Log (json);
+		//Debug.Log (json);
 
         for (int i = 0; i < data.Count; i++)
         {

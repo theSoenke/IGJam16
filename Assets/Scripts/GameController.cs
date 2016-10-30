@@ -16,8 +16,11 @@ public class GameController : MonoBehaviour
     public int minSpamTime = 5;
     public int maxSpamTime = 30;
 
+
+
     private DesktopController _desktopController;
     private Scoreboard _scoreboard;
+
     private float _multiplierTimer;
     private float _nextSpamEmailTimer;
 
@@ -58,6 +61,19 @@ public class GameController : MonoBehaviour
         set
         {
             _scoreboard.scoreFactor = value;
+        }
+    }
+
+    public bool Working
+    {
+        get
+        {
+            return _scoreboard.working;
+        }
+
+        set
+        {
+            _scoreboard.working = value;
         }
     }
 
