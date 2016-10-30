@@ -53,10 +53,10 @@ public class DesktopController : MonoBehaviour
 
     private void SpawnItem(float difficulty)
     {
-        int itemsToSpawn = (int)Mathf.Ceil(difficulty * 10);        //  <-- ???
+        int itemsToSpawn = (int)Mathf.Ceil(difficulty * 5);       
         Debug.Log("Spawning " + itemsToSpawn + " items");
 
-        for (int i = 0; i < difficulty; i++)
+		for (int i = 0; i < itemsToSpawn; i++)
         {
             int randX = Random.Range(0, gridSize - 1);
             int randY = Random.Range(0, gridSize - 1);
@@ -66,6 +66,7 @@ public class DesktopController : MonoBehaviour
                 var pos = new Vector3(randX, randY, 0);
                 pos.x *= tileWidth;
                 pos.y *= tileHeight;
+				pos += new Vector3 (padding, padding, 0);
 
                 GameObject itemObject = (GameObject)Instantiate(itemPrefab);
                 itemObject.transform.SetParent(screen);
