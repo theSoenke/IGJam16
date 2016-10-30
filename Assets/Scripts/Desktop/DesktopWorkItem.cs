@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 
 
-public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     public AudioSource dropSound;
     public float lifeTimeSec;
@@ -52,16 +52,6 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
     }
 
-    void OnGUI()
-    {
-        // doubleclick event
-        if (Event.current.isMouse && Event.current.button == 0 && Event.current.clickCount == 2)
-        {
-            GameController.Instance.ShowWorkingMenu(workTimeSec, gameObject);
-            _beingWorkedOn = true;
-        }
-    }
-
     public void Die()
     {
         GameController.Instance.DesktopController.RemoveItem(this);
@@ -96,4 +86,9 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        GameController.Instance.ShowWorkingMenu(workTimeSec, gameObject);
+        _beingWorkedOn = true;
+    }
 }

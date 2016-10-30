@@ -7,7 +7,7 @@ public class EmailController : MonoBehaviour
     public GameObject emailView;
 
 
-    public void SetMailText(string content)
+    public void ShowMessage(string content)
     {
         emailView.SetActive(true);
         mailText.text = content;
