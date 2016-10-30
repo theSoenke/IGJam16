@@ -147,6 +147,7 @@ public class GameController : MonoBehaviour
 
     public void ShowWorkingMenu(float duration, GameObject sender)
     {
+		ScoreMultiplier = 1;
         workingCanvas.SetActive(true);
         StatusBar sb = workingCanvas.GetComponentInChildren<StatusBar>();
         var wd = workingCanvas.GetComponentInChildren<WorkDone>();
