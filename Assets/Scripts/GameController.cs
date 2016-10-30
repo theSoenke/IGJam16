@@ -14,9 +14,12 @@ public class GameController : MonoBehaviour
     public GameObject redditCanvas;
     public GameObject workingCanvas;
 
+
+
     private DesktopController _desktopController;
     private Scoreboard _scoreboard;
     private float _multiplierTimer = 0;
+    
 
     public int Lifepoints
     {
@@ -55,6 +58,19 @@ public class GameController : MonoBehaviour
         set
         {
             _scoreboard.scoreFactor = value;
+        }
+    }
+
+    public bool Working
+    {
+        get
+        {
+            return _scoreboard.working;
+        }
+
+        set
+        {
+            _scoreboard.working = value;
         }
     }
 

@@ -10,6 +10,7 @@ public class WorkDone : MonoBehaviour
     {
         workingCanvas.SetActive(false);
         workItem.GetComponent<DesktopWorkItem>().Die();
+        GameController.Instance.Working = false;
     }
 
     

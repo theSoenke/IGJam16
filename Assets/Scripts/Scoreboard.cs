@@ -8,7 +8,7 @@ public class Scoreboard : MonoBehaviour
     private float _score = 0;
 
     private float _lastDisplayUpdate;
-
+    public bool working;
 
     public float scorePerSecond = 1;
     public float scoreFactor = 1;
@@ -16,8 +16,12 @@ public class Scoreboard : MonoBehaviour
 
     void Update()
     {
-        _score += scorePerSecond * Time.deltaTime * scoreFactor;
-		string text = "" + GameController.Instance.Lifepoints + " lives | " + scoreFactor + "x | " + Mathf.Floor(_score);
-		scoreDisplay.text = text;
+        if (!working)
+        {
+            _score += scorePerSecond * Time.deltaTime * scoreFactor;
+            string text = "" + GameController.Instance.Lifepoints + " lives | " + scoreFactor + "x | " +
+                          Mathf.Floor(_score);
+            scoreDisplay.text = text;
+        }
     }
 }

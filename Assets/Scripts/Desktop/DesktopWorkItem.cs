@@ -90,5 +90,6 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         GameController.Instance.ShowWorkingMenu(workTimeSec, gameObject);
         _beingWorkedOn = true;
+        GameController.Instance.Working = true;
     }
 }
