@@ -125,19 +125,19 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
     {
         switch (RageStatusColleague)
         {
-            case 1:
+            case 0:
                 smileyImage.overrideSprite = smileyHappy;
                 break;
-            case 2:
+            case 1:
                 smileyImage.overrideSprite = smileySmiling;
                 break;
-            case 3:
+            case 2:
                 smileyImage.overrideSprite = smileyNeutral;
                 break;
-            case 4:
+            case 3:
                 smileyImage.overrideSprite = smileyAngry;
                 break;
-            case 5:
+            case 4:
                 smileyImage.overrideSprite = smileyRaging;
                 break;
         }
