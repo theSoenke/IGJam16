@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 
-public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public AudioSource dropSound;
     public float lifeTimeSec;
@@ -12,6 +13,8 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     //dumb stuff: determinds the rage induced on the coworker dropped on
     [Range(1, 3)]
     public int timeFactor = 1;
+
+    public List<GameObject> clocks;
 
     public static GameObject itemDragged;
 
@@ -96,5 +99,19 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         GameController.Instance.ShowWorkingMenu(workTimeSec, gameObject);
         _beingWorkedOn = true;
         GameController.Instance.Working = true;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        for (int i = 0; i < timeFactor; i++)
+        {
+            clocks[i].SetActive(true);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        foreach(var c in clocks)
+            c.SetActive(false);
     }
 }
