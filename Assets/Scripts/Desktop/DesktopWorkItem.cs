@@ -33,6 +33,8 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     void Start()
     {
+        if (timeFactor > 3)
+            timeFactor = 3;
         _deadLine = Time.time + lifeTimeSec;
         _animator = GetComponent<Animator>();
         _animator.Play("Empty");
