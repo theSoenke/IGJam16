@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     private DesktopController _desktopController;
     private Scoreboard _scoreboard;
     private float _multiplierTimer;
-    private float nextSpamEmailTimer;
+    private float _nextSpamEmailTimer;
 
     public int Lifepoints
     {
@@ -89,7 +89,7 @@ public class GameController : MonoBehaviour
         _desktopController = GetComponent<DesktopController>();
         EmailController = GetComponent<EmailController>();
         _scoreboard = GetComponent<Scoreboard>();
-        nextSpamEmailTimer = Random.Range(minSpamTime, maxSpamTime);
+        _nextSpamEmailTimer = Random.Range(minSpamTime, maxSpamTime);
     }
 
     private void EndGame()
@@ -113,11 +113,11 @@ public class GameController : MonoBehaviour
             UpdateMultiplier();
         }
 
-        nextSpamEmailTimer -= Time.deltaTime;
-        if (nextSpamEmailTimer <= 0)
+        _nextSpamEmailTimer -= Time.deltaTime;
+        if (_nextSpamEmailTimer <= 0)
         {
             this.EmailController.ShowRandomSpam();
-            nextSpamEmailTimer = Random.Range(minSpamTime, maxSpamTime);
+            _nextSpamEmailTimer = Random.Range(minSpamTime, maxSpamTime);
         }
     }
 
