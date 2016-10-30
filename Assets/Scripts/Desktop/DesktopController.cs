@@ -53,7 +53,7 @@ public class DesktopController : MonoBehaviour
 
     private void SpawnItem(float difficulty)
     {
-        int itemsToSpawn = (int)Mathf.Ceil(difficulty * 10);
+        int itemsToSpawn = (int)Mathf.Ceil(difficulty * 10);        //  <-- ???
         Debug.Log("Spawning " + itemsToSpawn + " items");
 
         for (int i = 0; i < difficulty; i++)

@@ -31,6 +31,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         _deadLine = Time.time + lifeTimeSec;
         _animator = GetComponent<Animator>();
+        _animator.Play("Empty");
     }
 
     private void Update()
@@ -64,7 +65,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 		GameController.Instance.DesktopController.RemoveItem (this);
         Destroy(gameObject, 0.5f);
         _startPosition = transform.position;
-        _animator.Play(DeathAnim);   //TODO: fix anim
+        _animator.Play(DeathAnim);   
     }
 
     public void OnDrag(PointerEventData eventData)

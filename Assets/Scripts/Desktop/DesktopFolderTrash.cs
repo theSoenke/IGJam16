@@ -21,6 +21,14 @@ public class DesktopFolderTrash : MonoBehaviour, IDropHandler, IPointerEnterHand
     public void OnDrop(PointerEventData eventData)
     {
         DesktopWorkItem itemDragged = DesktopWorkItem.itemDragged.GetComponent<DesktopWorkItem>();
+
+        if (Random.value > 0.5f)
+        {
+            GameController.Instance.Lifepoints--;
+            //TODO: VFX/SFX
+        }
+        itemDragged.Die();
+
         GetComponent<AudioSource>().Play();
     }
 
