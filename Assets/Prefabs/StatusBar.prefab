@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fg: {fileID: 224000013317336970}
   duration: 5
+  disableAfterwards: 1
 --- !u!114 &114000013886793442
 MonoBehaviour:
   m_ObjectHideFlags: 1

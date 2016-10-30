@@ -96,6 +96,6 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameController.Instance.ShowWorkingMenu();
+        GameController.Instance.ShowWorkingMenu(workTimeSec, gameObject);
     }
 }

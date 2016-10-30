@@ -117,8 +117,12 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void ShowWorkingMenu()
+    public void ShowWorkingMenu(float duration, GameObject sender)
     {
         workingCanvas.SetActive(true);
+        StatusBar sb = workingCanvas.GetComponentInChildren<StatusBar>();
+        var wd = workingCanvas.GetComponentInChildren<WorkDone>();
+        wd.workItem = sender;
+        sb.duration = duration;
     }
 }
