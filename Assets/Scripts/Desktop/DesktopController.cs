@@ -71,11 +71,25 @@ public class DesktopController : MonoBehaviour
                 GameObject itemObject = (GameObject)Instantiate(itemPrefab);
                 itemObject.transform.SetParent(screen);
                 itemObject.transform.localPosition = pos;
+                AdjustItemProperties(itemObject, difficulty);
 
                 _itemGrid[randX, randY] = itemObject.GetComponent<DesktopWorkItem>();
             }
         }
     }
+
+
+    private void AdjustItemProperties(GameObject item, float difficulty)
+    {
+        var mb = item.GetComponent<DesktopWorkItem>();
+
+        mb.lifeTimeSec = 20 - 15.0f * difficulty * Random.Range(0.7f, 1.3f);
+        mb.workTimeSec = 15.0f * difficulty * Random.Range(0.7f, 1.3f);
+        mb.timeFactor = Mathf.CeilToInt(mb.workTimeSec / 10 * 3);
+
+
+    }
+
 
     public void RemoveItem(DesktopWorkItem item)
     {
