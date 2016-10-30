@@ -6,31 +6,20 @@ using UnityEngine;
 
 public class ImageFetcher
 {
-
-    /*private string _redditUrl = "http://images.earthcam.com/ec_metros/ourcams/fridays.jpg";
-	private string _clientId = "UqZAQ0ngVptioA";
-	private string _state = "make random string"; // TODO
-	private string _redirectUrl = "http%3A%2F%2F127.0.0.2";
-	private string _authorizeUrl = "http://www.reddit.com/api/v1/authorize";
-	// https://?client_id=&response_type=code&state=123penis123&redirect_uri=
-	private string _oauthToken;
-
-	public string MakeAuthReuest() {
-		string url = _authorizeUrl;
-		url += "?client_id=" + _clientId;
-		url += "&response_type=code";
-		url += "&state=" + _state;
-		url += "&redirect_url=" + _redirectUrl;
-		url += "&scope=read";
-		return url;
-	}*/
-
     private ImageReceiver _imageReceiver;
+	private int page;
+	private bool idle;
 
     public ImageFetcher(ImageReceiver imageReceiver)
     {
         _imageReceiver = imageReceiver;
+		page = 1;
+		idle = true;
     }
+
+	public bool Idle() {
+		return idle;
+	}
 
     public IEnumerator FetchImage(string title, string path)
     {
@@ -48,17 +37,19 @@ public class ImageFetcher
 
     public IEnumerator GetGallery()
     {
+		idle = false;
         Debug.Log("Starf loading images");
 
         // string url = MakeAuthReuest ();
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers["Authorization"] = "Client-ID " + "24638144948bc87";
 
-        WWW www = new WWW("https://api.imgur.com/3/gallery/r/adviceanimals", null, headers);
+        WWW www = new WWW("https://api.imgur.com/3/gallery/r/adviceanimals/time/" + page, null, headers);
         yield return www;
 
         var json = JSON.Parse(www.text);
         var data = json["data"];
+		Debug.Log (json);
 
         for (int i = 0; i < data.Count; i++)
         {
@@ -68,6 +59,9 @@ public class ImageFetcher
                 yield return FetchImage(image["title"], image["link"]);
             }
         }
+
+		page++;
+		idle = true;
 
         Debug.Log("Done loading images");
     }
