@@ -42,6 +42,7 @@ public class DesktopController : MonoBehaviour
         GameController gameController = GameController.Instance;
 
         if (gameController.gameOverCanvas.activeSelf ||
+            gameController.EmailController.emailView.activeSelf ||
             gameController.pongCanvas.activeSelf ||
             gameController.redditCanvas.activeSelf ||
             gameController.workingCanvas.activeSelf)
