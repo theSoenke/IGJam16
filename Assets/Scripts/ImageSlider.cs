@@ -10,15 +10,15 @@ public class ImageSlider : MonoBehaviour, ImageReceiver
 
     private float _timer;
     private Queue<Sprite> _imageQueue;
-
+	private ImageFetcher _imageFetcher;
 
     void Start()
     {
         _imageQueue = new Queue<Sprite>();
         nextImageButton.onClick.AddListener(NextImage);
 
-        var imageFetcher = new ImageFetcher(this);
-        StartCoroutine(imageFetcher.GetGallery());
+        _imageFetcher = new ImageFetcher(this);
+        StartCoroutine(_imageFetcher.GetGallery());
     }
 
     void Update()
@@ -38,7 +38,12 @@ public class ImageSlider : MonoBehaviour, ImageReceiver
     {
         if (_timer <= 0)
         {
-            if (_imageQueue.Count == 0) return;
+			if (_imageQueue.Count == 0) {
+				if (_imageFetcher.Idle ()) {
+					StartCoroutine (_imageFetcher.GetGallery ());
+				}
+				return;
+			}
             Sprite sprite = _imageQueue.Dequeue();
             currentSliderImage.sprite = sprite;
             _timer = timeout;

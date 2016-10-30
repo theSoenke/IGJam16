@@ -33,7 +33,9 @@ public class StatusBar : MonoBehaviour
             var wd = GetComponent<WorkDone>();
             if (wd != null)
                 wd.Done();
-            
+            Reset();
+
+
         }
     }
 }

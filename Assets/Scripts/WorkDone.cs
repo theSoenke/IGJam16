@@ -9,7 +9,7 @@ public class WorkDone : MonoBehaviour
     public void Done()
     {
         workingCanvas.SetActive(false);
-        Destroy(workItem);
+        workItem.GetComponent<DesktopWorkItem>().Die();
     }
 
     
