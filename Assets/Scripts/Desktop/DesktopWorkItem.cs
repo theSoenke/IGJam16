@@ -44,7 +44,7 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             Die();
         }
 
-        if ((_deadLine - Time.time) < (_deadLine / 3) && !_warning)
+        if ((_deadLine - Time.time) < (lifeTimeSec / 3) && !_warning)
         {
             _warning = true;
             _animator.Play(WarningAnim);

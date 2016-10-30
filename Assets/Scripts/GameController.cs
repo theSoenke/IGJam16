@@ -113,7 +113,7 @@ public class GameController : MonoBehaviour
     {
         if (pongCanvas.activeSelf || redditCanvas.activeSelf)
         {
-            ScoreMultiplier *= 2;
+            ScoreMultiplier += 2;
         }
     }
 
