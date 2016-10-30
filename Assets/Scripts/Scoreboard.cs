@@ -19,9 +19,10 @@ public class Scoreboard : MonoBehaviour
         if (!working)
         {
             _score += scorePerSecond * Time.deltaTime * scoreFactor;
-            string text = "" + GameController.Instance.Lifepoints + " lives | " + scoreFactor + "x | " +
-                          Mathf.Floor(_score);
-            scoreDisplay.text = text;
+            
         }
+        string text = "" + GameController.Instance.Lifepoints + " lives | " + scoreFactor + "x | " +
+                          Mathf.Floor(_score);
+        scoreDisplay.text = text;
     }
 }

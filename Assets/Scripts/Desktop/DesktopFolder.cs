@@ -75,6 +75,8 @@ public class DesktopFolder : MonoBehaviour, IDropHandler, IPointerEnterHandler, 
         set
         {
             _rageStatusColleague = value;
+            if (value > 5)
+                _rageStatusColleague = 5;
             SynchronizeSpriteWithRageStatus();
         }
     }
