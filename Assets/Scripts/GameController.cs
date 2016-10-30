@@ -13,13 +13,16 @@ public class GameController : MonoBehaviour
     public GameObject pongCanvas;
     public GameObject redditCanvas;
     public GameObject workingCanvas;
+    public int minSpamTime = 5;
+    public int maxSpamTime = 30;
 
 
 
     private DesktopController _desktopController;
     private Scoreboard _scoreboard;
-    private float _multiplierTimer = 0;
-    
+
+    private float _multiplierTimer;
+    private float nextSpamEmailTimer;
 
     public int Lifepoints
     {
@@ -81,6 +84,7 @@ public class GameController : MonoBehaviour
 
     private int _lifepoints;
 
+
     public void Restart()
     {
         SceneManager.LoadScene(0);
@@ -101,6 +105,7 @@ public class GameController : MonoBehaviour
         _desktopController = GetComponent<DesktopController>();
         EmailController = GetComponent<EmailController>();
         _scoreboard = GetComponent<Scoreboard>();
+        nextSpamEmailTimer = Random.Range(minSpamTime, maxSpamTime);
     }
 
     private void EndGame()
@@ -122,6 +127,13 @@ public class GameController : MonoBehaviour
         {
             _multiplierTimer = 0;
             UpdateMultiplier();
+        }
+
+        nextSpamEmailTimer -= Time.deltaTime;
+        if (nextSpamEmailTimer <= 0)
+        {
+            this.EmailController.ShowRandomSpam();
+            nextSpamEmailTimer = Random.Range(minSpamTime, maxSpamTime);
         }
     }
 
