@@ -86,7 +86,7 @@ public class DesktopController : MonoBehaviour
 
         mb.lifeTimeSec = 20 - 15.0f * difficulty * Random.Range(0.7f, 1.3f) + 3;
         mb.workTimeSec = 15.0f * difficulty * Random.Range(0.7f, 1.3f) + 5;
-        mb.timeFactor = Mathf.CeilToInt(mb.workTimeSec / 10 * 3);
+        mb.timeFactor = Mathf.CeilToInt(mb.workTimeSec / 20 * 3);
 
 
     }
