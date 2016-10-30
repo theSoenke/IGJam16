@@ -54,6 +54,11 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void Die()
     {
+        if (GameController.Instance == null)
+        {
+            return;
+        }
+
         GameController.Instance.DesktopController.RemoveItem(this);
         Destroy(gameObject, 0.5f);
         _startPosition = transform.position;
