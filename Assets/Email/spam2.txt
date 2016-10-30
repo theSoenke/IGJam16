@@ -2,17 +2,12 @@ Hi John,
 
 I’m working on a new outreach solution to help B2B startups increase
 their sales. We call it sellIt.
-sellIt can::
-- Identify and hand pick highly targeted leads that match your ideal
-customer bio
+sellIt can:
+- Identify and hand pick highly targeted leads
 - Automate email outreach and follow-ups
-- Manage the outreach process (keeping an eye on open and reply rates, A/B
-testing subject lines, etc)
-In essence we deliver pre-qualified prospects who want to talk with you
-about your product.
+- Manage the outreach process
 Sound interesting? Hit reply, to schedule a brief phone call.
-Cheers,
-Kirstin
+Cheers, Kirstin
 CEO, sellIt
 Cherry Drive 24
-San Francisco, CA 94114 
+San Francisco, CA 94114

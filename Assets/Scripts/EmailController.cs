@@ -17,7 +17,7 @@ public class EmailController : MonoBehaviour
 
     public void ShowRandomSpam()
     {
-        int rand = Random.Range(0, emails.Count - 1);
+        int rand = Random.Range(0, emails.Count);
         ShowMessage(emails[rand].text);
     }
 }
