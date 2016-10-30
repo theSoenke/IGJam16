@@ -3152,8 +3152,8 @@ MonoBehaviour:
   pongCanvas: {fileID: 265015401}
   redditCanvas: {fileID: 1059241836}
   workingCanvas: {fileID: 721127709}
-  minSpamTime: 5
-  maxSpamTime: 30
+  minSpamTime: 15
+  maxSpamTime: 50
   initialLifes: 3
   Difficulty:
     serializedVersion: 2
