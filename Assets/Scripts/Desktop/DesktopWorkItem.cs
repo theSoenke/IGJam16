@@ -2,12 +2,12 @@
 using UnityEngine.EventSystems;
 
 
-public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     public AudioSource dropSound;
     public float lifeTimeSec;
     public float workTimeSec;
-	public Vector2 GridPosition { get; set; }
+    public Vector2 GridPosition { get; set; }
 
     //dumb stuff: determinds the rage induced on the coworker dropped on
     [Range(1, 3)]
@@ -62,10 +62,10 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void Die()
     {
-		GameController.Instance.DesktopController.RemoveItem (this);
+        GameController.Instance.DesktopController.RemoveItem(this);
         Destroy(gameObject, 0.5f);
         _startPosition = transform.position;
-        _animator.Play(DeathAnim);   
+        _animator.Play(DeathAnim);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -92,5 +92,10 @@ public class DesktopWorkItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             transform.position = _startPosition;
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        GameController.Instance.ShowWorkingMenu();
     }
 }
